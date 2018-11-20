@@ -1,5 +1,9 @@
 package Basic;
 
+/**
+ * 整个加减乘除计算器的基础部分
+ * 与、或、异或的实现
+ */
 public class Arithmetic {
     public static char AND(char c1, char c2){
         if (c1 == '1' && c2 == '1') return '1';
