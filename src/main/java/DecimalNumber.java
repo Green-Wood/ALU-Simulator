@@ -1,8 +1,8 @@
 import Basic.*;
 
 /**
- *一种神奇的十进制数的二进制表达方法。
- *这里我们使用了33位二进制数来表达（1位符号位和32位数据位）
+ * 一种神奇的十进制数的二进制表达方法。
+ * 这里我们使用了33位二进制数来表达（1位符号位和32位数据位）
  * 例如：15 -> 0 0000 0000 0000 0000 0000 0000 0001 0101       -22 -> 1 0000 0000 0000 0000 0000 0000 0010 0010
  * 还未实现这种表达方式的乘除法
  * @author greenwood
@@ -56,11 +56,17 @@ public class DecimalNumber extends ALU {
 
     @Override
     protected String add(String s1, String s2) {                  // 符号相同则相加，否则相减
-        if (s1.charAt(0) == s2.charAt(0)) return innerAdd(s1, s2);
-        else return innerSub(s1, s2);
+        if (s1.charAt(0) == s2.charAt(0)) return unsignedNumberAdd(s1, s2);
+        else return unsignedNumberSub(s1, s2);
     }
 
-    private String innerAdd(String s1, String s2) {                 // 可看作是无符号数的相加，结果与s1的符号相同
+    @Override
+    protected String sub(String s1, String s2) {                         // 符号相同则相减，否则相加
+        if (s1.charAt(0) == s2.charAt(0)) return unsignedNumberSub(s1, s2);
+        else return unsignedNumberAdd(s1, s2);
+    }
+
+    private String unsignedNumberAdd(String s1, String s2) {                 // 可看作是无符号数的相加，结果与s1的符号相同
         StringBuilder sb = new StringBuilder();
         sb.append(s1.charAt(0));
         preC = '0';
@@ -78,15 +84,9 @@ public class DecimalNumber extends ALU {
         return sb.toString();
     }
 
-    @Override
-    protected String sub(String s1, String s2) {                         // 符号相同则相减，否则相加
-        if (s1.charAt(0) == s2.charAt(0)) return innerSub(s1, s2);
-        else return innerAdd(s1, s2);
-    }
-
-    private String innerSub(String s1, String s2) {              // 可看作是无符号数的相减，如果结果产生进位，证明减成功
+    private String unsignedNumberSub(String s1, String s2) {              // 可看作是无符号数的相减，如果结果产生进位，证明减成功
         s2 = reverse(s2);                                        // 若没有产生进位，则需要对结果进行"取反加一"
-        String ans = innerAdd(s1, s2);
+        String ans = unsignedNumberAdd(s1, s2);
         if (preC == '0') {
             ans = reverse(ans);
         }
