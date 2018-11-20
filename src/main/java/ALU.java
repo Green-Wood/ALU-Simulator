@@ -8,8 +8,8 @@
 public abstract class ALU {
     String n1, n2;
 
-    String re;        // remainder
-    String quo;       // quotient
+    String remainder;
+    String quotient;
 
     /**
      * @param n1, n2 载入需要进行运算的两个十进制数
@@ -39,11 +39,11 @@ public abstract class ALU {
     }
 
     public String getRemainder() {
-        return toDecimal(re);
+        return toDecimal(remainder);
     }
 
     public String getQuotient() {
-        return toDecimal(quo);
+        return toDecimal(quotient);
     }
 
     protected abstract String toDecimal(String bin);         // 各个具体子类需要自己实现十进制与二进制互相转化的方法

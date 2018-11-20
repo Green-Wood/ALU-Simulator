@@ -19,13 +19,13 @@ public class DecimalNumber extends ALU {
     protected String toDecimal(String bin) {               // 二进制转十进制
         StringBuilder decimal = new StringBuilder();
         for (int i = 1; i < 33; i += 4) {
-            String num = bin.substring(i, i + 4);
-            int ans = 0;
-            for (int j = 0; j < num.length(); j++) {
-                ans *= 2;
-                ans += num.charAt(j) - '0';
+            String binaryValue = bin.substring(i, i + 4);
+            int decimalValue = 0;
+            for (int j = 0; j < binaryValue.length(); j++) {
+                decimalValue *= 2;
+                decimalValue += binaryValue.charAt(j) - '0';
             }
-            if (ans != 0 || decimal.length() != 0) decimal.append(ans);
+            if (decimalValue != 0 || decimal.length() != 0) decimal.append(decimalValue);
         }
         if (decimal.length() == 0) return "0";
         if (bin.charAt(0) == '1') decimal.insert(0, '-');

@@ -101,8 +101,8 @@ public class IntegerNumber extends ALU{
                 remainder = sub(remainder, divisor);
             }
         }
-        this.re = remainder;
-        this.quo = quotient;
+        this.remainder = remainder;
+        this.quotient = quotient;
     }
 
     @Override
