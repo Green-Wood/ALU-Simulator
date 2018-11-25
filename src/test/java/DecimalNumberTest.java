@@ -36,5 +36,6 @@ public class DecimalNumberTest {
         int ran1 = (int) (Math.random() * -1000 + 500);
         int ran2 = (int) (Math.random() * -1000 + 500);
         assertEquals(String.valueOf(ran1 - ran2), new DecimalNumber(String.valueOf(ran1), String.valueOf(ran2)).sub());
+        System.out.println(ran1 + "   " + ran2);
     }
 }

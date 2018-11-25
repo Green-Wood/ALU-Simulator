@@ -61,9 +61,10 @@ public class DecimalNumber extends ALU {
     }
 
     @Override
-    protected String sub(String s1, String s2) {                         // 符号相同则相减，否则相加
-        if (s1.charAt(0) == s2.charAt(0)) return unsignedNumberSub(s1, s2);
-        else return unsignedNumberAdd(s1, s2);
+    protected String sub(String s1, String s2) {                         // 将减法变为加法
+        if (s2.charAt(0) == '1') s2 = '0' + s2.substring(1);
+        else s2 = '1' + s2.substring(1);
+        return add(s1, s2);
     }
 
     private String unsignedNumberAdd(String s1, String s2) {                 // 可看作是无符号数的相加，结果与s1的符号相同
