@@ -14,7 +14,7 @@ public class IntegerNumber extends ALU{
 
     @Override
     protected String add(String s1, String s2){     // 两个二进制数相加，返回一个二进制数
-        SerialAdder adder = new SerialAdder(s1, s2);
+        adder.setOperand(s1, s2);
         return adder.calculate('0');
     }
 
@@ -25,7 +25,7 @@ public class IntegerNumber extends ALU{
             if (s2.charAt(i) == '0') sb.append('1');
             else sb.append('0');
         }
-        SerialAdder adder = new SerialAdder(s1, sb.toString());
+        adder.setOperand(s1, sb.toString());
         return adder.calculate('1');
     }
 

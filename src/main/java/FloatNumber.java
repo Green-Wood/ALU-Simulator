@@ -1,3 +1,7 @@
+
+import Basic.StringGenerator;
+
+
 public class FloatNumber extends ALU {
 
     public FloatNumber(String n1, String n2) {
@@ -153,7 +157,89 @@ public class FloatNumber extends ALU {
     }
 
     protected String add(String s1, String s2) {
-        return null;
+        if (toDecimal(s1).equals("0")) return s2;
+        if (toDecimal(s2).equals("0")) return s1;
+        String exponent1 = s1.substring(1, 9);
+        String sig1 = s1.substring(9);
+        if (isAllZero(exponent1)) {
+            sig1 = "0" + sig1;
+            exponent1 = "00000001";
+        }
+        else sig1 = "1" + sig1;
+        String exponent2 = s2.substring(1, 9);
+        String sig2 = s2.substring(9);
+        if (isAllZero(exponent2)) {
+            sig2 = "0" + sig2;
+            exponent2 = "00000001";
+        }
+        else sig2 = "1" +sig2;
+
+
+        if (!exponent1.equals(exponent2)) {        // 对齐指数
+            int exponentValue1 = Integer.valueOf(exponent1, 2);
+            int exponentValue2 = Integer.valueOf(exponent2, 2);
+            int delta = Math.abs(exponentValue1 - exponentValue2);
+            if (exponentValue1 > exponentValue2) {
+                exponent2 = exponent1;
+                sig2 = StringGenerator.repeat('0', delta) + sig2.substring(0, sig2.length()-delta);
+            } else {
+                exponent1 = exponent2;
+                sig1 = StringGenerator.repeat('0', delta) + sig1.substring(0, sig1.length()-delta);
+            }
+        }
+        if (isAllZero(sig1)) return s2;
+        if (isAllZero(sig2)) return s1;
+
+
+        String ansSignificant;                                          //   计算带符号数之和
+        String ansExponent = exponent1;
+        String ansSign = s1.substring(0, 1);
+        if (s1.charAt(0) == s2.charAt(0)) {
+            ansSignificant = unsignedAdd(sig1, sig2);
+            if (adder.nextC == '1') {                      // 处理尾数相加溢出
+                ansSignificant = "1" + ansSignificant.substring(0, ansSignificant.length()-1);
+                adder.setOperand(ansExponent, StringGenerator.repeat('0', ansExponent.length()));
+                ansExponent = adder.calculate('1');
+                if (isAllZero(ansExponent)) {               // 处理指数溢出
+                    if (ansSign.equals("0")) return toBinary("plus infinity");
+                    else return toBinary("minus infinity");
+                }
+            }
+
+        }
+        else {
+            ansSignificant = unsignedSub(sig1, sig2);
+            if (isAllZero(ansSignificant)) return toBinary("0");    // 处理相减为0
+            if (adder.nextC != '1') {
+                if (ansSign.equals("1")) ansSign = "0";
+                else ansSign = "1";
+                String reverse = StringGenerator.getReverse(ansSignificant);
+                adder.setOperand(reverse, StringGenerator.repeat('0', reverse.length()));
+                ansSignificant = adder.calculate('1');
+            }
+            int offset = ansSignificant.indexOf("1");
+            for (int i = 0; i < offset; i++) {
+                adder.setOperand(ansExponent, StringGenerator.repeat('1', ansExponent.length()));
+                ansExponent = adder.calculate('0');
+                if (isAllZero(ansExponent)) {
+                    break;
+                }
+                ansSignificant = ansSignificant.substring(1) + "0";
+            }
+        }
+
+        return ansSign + ansExponent + ansSignificant.substring(1);
+    }
+
+    private String unsignedAdd(String s1, String s2) {
+        adder.setOperand(s1, s2);
+        return adder.calculate('0');
+    }
+
+    private String unsignedSub(String s1, String s2) {
+        s2 = StringGenerator.getReverse(s2);
+        adder.setOperand(s1, s2);
+        return adder.calculate('1');
     }
 
     protected String sub(String s1, String s2) {

@@ -72,11 +72,11 @@ public class DecimalNumber extends ALU {
         sb.append(s1.charAt(0));
         preC = '0';
         for (int i = 29; i >= 1; i -= 4) {
-            SerialAdder adder = new SerialAdder(s1.substring(i, i + 4), s2.substring(i, i + 4));
+            adder.setOperand(s1.substring(i, i + 4), s2.substring(i, i + 4));
             String ans = adder.calculate(preC);
             preC = adder.nextC;
             if (preC == '1' || (ans.charAt(0) == '1' && (ans.charAt(1) == '1' || ans.charAt(2) == '1'))) {
-                adder = new SerialAdder(ans, "0110");
+                adder.setOperand(ans, "0110");
                 ans = adder.calculate('0');
                 preC = Arithmetic.OR(adder.nextC, preC);
             }
@@ -98,14 +98,16 @@ public class DecimalNumber extends ALU {
         StringBuilder reverse = new StringBuilder();
         for (int i = 1; i < 33; i += 4) {
             String subString = s.substring(i, i + 4);
-            subString = new SerialAdder(subString, "0110").calculate('0');        // 加6后取反
+            adder.setOperand(subString, "0110");
+            subString = adder.calculate('0');
             for (int j = 0; j < subString.length(); j++) {
                 if (subString.charAt(j) == '0') reverse.append('1');
                 else reverse.append('0');
             }
         }
         String ans = reverse.toString();
-        ans = new SerialAdder(ans, "00000000000000000000000000000000").calculate('1');     // 加一
+        adder.setOperand(ans, "00000000000000000000000000000000");
+        ans = adder.calculate('1');                  //  加一
         if (s.charAt(0) == '0') ans = "1" + ans;
         else ans = "0" + ans;
         return ans;

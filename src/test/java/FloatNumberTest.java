@@ -29,10 +29,14 @@ public class FloatNumberTest {
 
     @Test
     public void add() {
+        assertEquals("1.4375", new FloatNumber("0.8125", "0.625").add());
+        assertEquals(String.valueOf((float) 2), new FloatNumber("1", "1").add());
     }
 
     @Test
     public void sub() {
+        assertEquals("0.1875", new FloatNumber("0.8125", "0.625").sub());
+        assertEquals("-0.1875", new FloatNumber("0.625", "0.8125").sub());
     }
 
     @Test

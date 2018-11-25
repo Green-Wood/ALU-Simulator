@@ -7,14 +7,19 @@ public class SerialAdder {
     private char[] s1, s2;
     private FullAdder[] adders;
     public char nextC;
+    public static SerialAdder serialAdder;
 
-    /**
-     * @param s1, s2 输入两个二进制数，结果通过calculate方法返回，产生的进位存储在nextC中
-     */
-    public SerialAdder(String s1, String s2){         // 输入32位二进制数
-        this.s1 = s1.toCharArray();
-        this.s2 = s2.toCharArray();
-        adders = new FullAdder[s1.length()];
+    public static SerialAdder getSerialAdder() {
+        if (serialAdder == null) serialAdder = new SerialAdder();
+        return serialAdder;
+    }
+
+    private SerialAdder(){}
+
+    public void setOperand(String n1, String n2) {
+        s1 = n1.toCharArray();
+        s2 = n2.toCharArray();
+        adders = new FullAdder[s1.length];
     }
 
     /**

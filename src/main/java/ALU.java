@@ -1,3 +1,5 @@
+import Basic.SerialAdder;
+
 /**
  * 整个ALU simulator的抽象类
  *
@@ -6,10 +8,12 @@
  * @author greenwood
  */
 public abstract class ALU {
-    String n1, n2;
+    private String n1, n2;
 
     String remainder;
     String quotient;
+
+    SerialAdder adder;
 
     /**
      * @param n1, n2 载入需要进行运算的两个十进制数
@@ -17,6 +21,7 @@ public abstract class ALU {
     public ALU(String n1, String n2) {
         this.n1 = toBinary(n1);
         this.n2 = toBinary(n2);
+        adder = SerialAdder.getSerialAdder();
     }
 
     public String add() {
@@ -49,6 +54,7 @@ public abstract class ALU {
     protected abstract String toDecimal(String bin);         // 各个具体子类需要自己实现十进制与二进制互相转化的方法
     protected abstract String toBinary(String n);
 
+    // 以下方法都是给予两个二进制数，返回计算结果的二进制表示
     protected abstract String add(String s1, String s2);
     protected abstract String sub(String s1, String s2);
     protected abstract String multi(String s1, String s2);

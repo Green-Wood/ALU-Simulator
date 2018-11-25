@@ -4,7 +4,9 @@ public class Main {
 //        ALU floatPoint = new FloatNumber("0", "0");
 //        System.out.println(floatPoint.toDecimal("00000000000000000000000000000001"));
 //        System.out.println(Math.pow(2, -149));
-        System.out.println(Float.toHexString((float) -123.23));
-        System.out.println();
+//        ALU floatPoint = new FloatNumber("0", "0");
+//        System.out.println(floatPoint.toBinary("0.8125"));
+//        System.out.println(floatPoint.toBinary("0.625"));
+        System.out.println(Integer.toBinaryString(-1));
     }
 }
