@@ -1,4 +1,4 @@
-import Basic.SerialAdder;
+import Basic.StringGenerator;
 
 /**
  * 由位运算实现加减乘除
@@ -7,10 +7,6 @@ import Basic.SerialAdder;
  * @author greenwood
  */
 public class IntegerNumber extends ALU{
-
-    public IntegerNumber(String n1, String n2) {
-        super(n1, n2);
-    }
 
     @Override
     protected String add(String s1, String s2){     // 两个二进制数相加，返回一个二进制数
@@ -32,9 +28,9 @@ public class IntegerNumber extends ALU{
     @Override
     protected String multi(String s1, String s2){       // 使用Booth算法来计算带符号二进制乘法
         String x = s1;
-        String _x = sub("00000000000000000000000000000000", s1);
+        String _x = sub(StringGenerator.repeat('0', 32), s1);
         String y = s2;
-        StringBuilder sb = new StringBuilder("00000000000000000000000000000000" + y);      // 模拟寄存器
+        StringBuilder sb = new StringBuilder(StringGenerator.repeat('0', 32) + y);      // 模拟寄存器
         y = y + "0";                                   // y后添加零，使得我们可以计算y0
         for (int i = y.length()-1; i > 0; i--){
             int delta = y.charAt(i) - y.charAt(i-1);       // 决定使用x或-x或0
@@ -52,7 +48,7 @@ public class IntegerNumber extends ALU{
             sb.deleteCharAt(sb.length()-1);                 // 右移
             sb.insert(0, sign);
         }
-        String bin = sb.substring(sb.length()-32, sb.length());      // 从倒数第二位开始
+        String bin = sb.substring(sb.length()-32);      // 从倒数第二位开始
         return bin;
     }
     @Override
@@ -62,8 +58,8 @@ public class IntegerNumber extends ALU{
         char diSign = divisor.charAt(0);
         char reSign = dividend.charAt(0);                    // remainder sign
         StringBuilder sb;
-        if (reSign == '0') sb = new StringBuilder("00000000000000000000000000000000" + dividend);  // 根据符号添加
-        else sb = new StringBuilder("11111111111111111111111111111111" + dividend);
+        if (reSign == '0') sb = new StringBuilder(StringGenerator.repeat('0', 32) + dividend);  // 根据符号添加
+        else sb = new StringBuilder(StringGenerator.repeat('1', 32) + dividend);
         char addQ = '1';
         for (int i = 0; i < 33; i++){
             reSign = sb.charAt(0);
@@ -90,7 +86,7 @@ public class IntegerNumber extends ALU{
         String quotient = sb.substring(32, sb.length());
         quotient = quotient.substring(1) + addQ;                    // left shift quotient
         if (quotient.charAt(0) == '1'){                             // if quotient is negative, add 1
-            quotient = add("00000000000000000000000000000001", quotient);
+            quotient = add(StringGenerator.repeat('0', 31) + "1" , quotient);
         }
         // 对余数的结果进行修正
         if (reSign != dividend.charAt(0)){

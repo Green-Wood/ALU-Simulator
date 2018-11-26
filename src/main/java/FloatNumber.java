@@ -1,12 +1,8 @@
-
+import Basic.Arithmetic;
 import Basic.StringGenerator;
 
 
 public class FloatNumber extends ALU {
-
-    public FloatNumber(String n1, String n2) {
-        super(n1, n2);
-    }
 
     protected String toDecimal(String bin) {
         String binaryExponent = bin.substring(1, 9);
@@ -249,7 +245,58 @@ public class FloatNumber extends ALU {
     }
 
     protected String multi(String s1, String s2) {
-        return null;
+        if (toDecimal(s1).equals("0") || toDecimal(s2).equals("0")) return toBinary("0");
+        String exponent1 = s1.substring(1, 9);
+        String sig1 = s1.substring(9);
+        if (isAllZero(exponent1)) {
+            sig1 = "0" + sig1;
+            exponent1 = "00000001";
+        }
+        else sig1 = "1" + sig1;
+        String exponent2 = s2.substring(1, 9);
+        String sig2 = s2.substring(9);
+        if (isAllZero(exponent2)) {
+            sig2 = "0" + sig2;
+            exponent2 = "00000001";
+        }
+        else sig2 = "1" +sig2;
+
+        int decimalExponent = Integer.valueOf(exponent1, 2) + Integer.valueOf(exponent2, 2) - 127*2;
+        if (decimalExponent >= 128) {
+            if (s1.charAt(0) == '1') return toBinary("minus infinity");
+            else return toBinary("plus infinity");
+        }
+
+
+        int len = sig1.length();
+        StringBuilder sb = new StringBuilder(StringGenerator.repeat('0', len) + sig2);
+        for (int i = sig2.length() - 1; i >= 0; i--) {
+            adder.nextC = '0';                     // 考虑加法可能产生进位
+            String half = sb.substring(0, len);
+            String newHalf;
+            if (sig2.charAt(i) == '1') {
+                adder.setOperand(half, sig1);
+                newHalf = adder.calculate('0');
+            } else {
+                newHalf = half;
+            }
+            sb.replace(0, len, newHalf);
+            sb.deleteCharAt(sb.length()-1);
+            sb.insert(0, adder.nextC);
+        }
+        String ansSignificant = sb.substring(0, len);
+        int offset = ansSignificant.indexOf("1");
+        decimalExponent++;
+        for (int i = 0; i < offset; i++) {
+            decimalExponent--;
+            if (decimalExponent == -127) {
+                break;
+            }
+            ansSignificant = ansSignificant.substring(1) + "0";
+        }
+        String ansSign = String.valueOf(Arithmetic.XOR(s1.charAt(0), s2.charAt(0)));
+        String ansExponent = toBinaryExponent(String.valueOf(decimalExponent));
+        return ansSign + ansExponent + ansSignificant.substring(1);
     }
 
     protected void division(String s1, String s2) {

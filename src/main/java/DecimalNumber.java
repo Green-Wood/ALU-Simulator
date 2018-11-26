@@ -11,10 +11,6 @@ public class DecimalNumber extends ALU {
 
     private char preC;          // 检测是否产生进位
 
-    public DecimalNumber(String n1, String n2) {
-        super(n1, n2);
-    }
-
     @Override
     protected String toDecimal(String bin) {               // 二进制转十进制
         StringBuilder decimal = new StringBuilder();
@@ -106,7 +102,7 @@ public class DecimalNumber extends ALU {
             }
         }
         String ans = reverse.toString();
-        adder.setOperand(ans, "00000000000000000000000000000000");
+        adder.setOperand(ans, StringGenerator.repeat('0', 32));
         ans = adder.calculate('1');                  //  加一
         if (s.charAt(0) == '0') ans = "1" + ans;
         else ans = "0" + ans;

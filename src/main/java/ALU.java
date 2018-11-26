@@ -15,13 +15,16 @@ public abstract class ALU {
 
     SerialAdder adder;
 
+    public ALU() {
+        adder = SerialAdder.getSerialAdder();
+    }
+
     /**
      * @param n1, n2 载入需要进行运算的两个十进制数
      */
-    public ALU(String n1, String n2) {
+    public void setOperand(String n1, String n2) {
         this.n1 = toBinary(n1);
         this.n2 = toBinary(n2);
-        adder = SerialAdder.getSerialAdder();
     }
 
     public String add() {

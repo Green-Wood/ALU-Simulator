@@ -3,7 +3,7 @@ package Basic;
 /**
  * 顺序进位加法器的实现
  */
-public class SerialAdder {
+public class SerialAdder {                 // 单件模式，全局只有一个顺序加法器adder
     private char[] s1, s2;
     private FullAdder[] adders;
     public char nextC;
