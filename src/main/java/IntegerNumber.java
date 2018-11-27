@@ -52,7 +52,7 @@ public class IntegerNumber extends ALU{
         return bin;
     }
     @Override
-    protected void division(String s1, String s2){        // 将除法的结果保存在两个实例变量中，quo商，re余数
+    protected String division(String s1, String s2){        // 将除法的结果保存在两个实例变量中，quo商，re余数
         String dividend = s1;
         String divisor = s2;
         char diSign = divisor.charAt(0);
@@ -98,7 +98,7 @@ public class IntegerNumber extends ALU{
             }
         }
         this.remainder = remainder;
-        this.quotient = quotient;
+        return quotient;
     }
 
     @Override

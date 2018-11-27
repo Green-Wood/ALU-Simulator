@@ -11,7 +11,6 @@ public abstract class ALU {
     private String n1, n2;
 
     String remainder;
-    String quotient;
 
     SerialAdder adder;
 
@@ -39,19 +38,10 @@ public abstract class ALU {
         return  toDecimal(multi(n1, n2));
     }
 
-    /**
-     * 调用division方法进行除法后，需要使用getQuotient和getRemainder方法来获取 商和余数
-     */
-    public void division() {
-        division(n1, n2);
-    }
+    public String division() {return toDecimal(division(n1, n2));}    // 返回商，余数需要使用getRemainder得到
 
     public String getRemainder() {
         return toDecimal(remainder);
-    }
-
-    public String getQuotient() {
-        return toDecimal(quotient);
     }
 
     protected abstract String toDecimal(String bin);         // 各个具体子类需要自己实现十进制与二进制互相转化的方法
@@ -61,5 +51,5 @@ public abstract class ALU {
     protected abstract String add(String s1, String s2);
     protected abstract String sub(String s1, String s2);
     protected abstract String multi(String s1, String s2);
-    protected abstract void division(String s1, String s2);
+    protected abstract String division(String s1, String s2);
 }

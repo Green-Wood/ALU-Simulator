@@ -116,5 +116,7 @@ public class DecimalNumber extends ALU {
     }
 
     @Override
-    protected void division(String s1, String s2) { }
+    protected String division(String s1, String s2) {
+        return null;
+    }
 }

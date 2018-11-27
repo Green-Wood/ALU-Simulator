@@ -76,5 +76,12 @@ public class FloatNumberTest {
 
     @Test
     public void division() {
+        test.setOperand("17", "12");
+        assertEquals(String.valueOf((float) 17/12), test.division());
+//        float ran1 = (float) (Math.random() * -100 + 50);
+//        float ran2 = (float) (Math.random() * -100 + 50);
+//        System.out.println(ran1 + "    " + ran2);
+//        test.setOperand(String.valueOf(ran1), String.valueOf(ran2));
+//        assertEquals(String.valueOf(ran1 / ran2), test.division());
     }
 }
