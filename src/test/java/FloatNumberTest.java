@@ -29,14 +29,10 @@ public class FloatNumberTest {
 
     @Test
     public void add() {
-        test.setOperand("0.8125", "0.625");
-        assertEquals("1.4375", test.add());
-        test.setOperand("1", "1");
-        assertEquals(String.valueOf((float) 2), test.add());
-        test.setOperand("1", "-1");
-        assertEquals("0", test.add());
-        test.setOperand("-20", "-100");
-        assertEquals(String.valueOf((float) -120), test.add());
+        assertEquals("1.4375", test.setOperand("0.8125", "0.625").add());
+        assertEquals(String.valueOf((float) 2), test.setOperand("1", "1").add());
+        assertEquals("0", test.setOperand("1", "-1").add());
+        assertEquals(String.valueOf((float) -120), test.setOperand("-20", "-100").add());
         float ran1 = (float) (Math.random() * -1000 + 500);
         float ran2 = (float) (Math.random() * -1000 + 500);
         System.out.println(ran1 + "    " + ran2);
@@ -46,10 +42,8 @@ public class FloatNumberTest {
 
     @Test
     public void sub() {
-        test.setOperand("0.8125", "0.625");
-        assertEquals("0.1875", test.sub());
-        test.setOperand("0.625", "0.8125");
-        assertEquals("-0.1875", test.sub());
+        assertEquals("0.1875", test.setOperand("0.8125", "0.625").sub());
+        assertEquals("-0.1875", test.setOperand("0.625", "0.8125").sub());
         float ran1 = (float) (Math.random() * -1000 + 500);
         float ran2 = (float) (Math.random() * -1000 + 500);
         System.out.println(ran1 + "    " + ran2);
@@ -59,14 +53,10 @@ public class FloatNumberTest {
 
     @Test
     public void multi() {
-        test.setOperand("0.5", "0.4375");
-        assertEquals(String.valueOf((float) 0.21875), test.multi());
-        test.setOperand("2", "-0.5");
-        assertEquals(String.valueOf((float) -1), test.multi());
-        test.setOperand("-50", "-3");
-        assertEquals(String.valueOf((float) 150), test.multi());
-        test.setOperand("27", "21");
-        assertEquals(String.valueOf((float) 567), test.multi());
+        assertEquals(String.valueOf((float) 0.21875), test.setOperand("0.5", "0.4375").multi());
+        assertEquals(String.valueOf((float) -1), test.setOperand("2", "-0.5").multi());
+        assertEquals(String.valueOf((float) 150), test.setOperand("-50", "-3").multi());
+        assertEquals(String.valueOf((float) 567), test.setOperand("27", "21").multi());
         float ran1 = (float) (Math.random() * -100 + 50);
         float ran2 = (float) (Math.random() * -100 + 50);
         System.out.println(ran1 + "    " + ran2);
@@ -76,8 +66,7 @@ public class FloatNumberTest {
 
     @Test
     public void division() {
-        test.setOperand("17", "12");
-        assertEquals(String.valueOf((float) 17/12), test.division());
+        assertEquals(String.valueOf((float) 17/12), test.setOperand("17", "12").division());
 //        float ran1 = (float) (Math.random() * -100 + 50);
 //        float ran2 = (float) (Math.random() * -100 + 50);
 //        System.out.println(ran1 + "    " + ran2);

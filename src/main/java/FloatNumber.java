@@ -228,14 +228,12 @@ public class FloatNumber extends ALU {
     }
 
     private String unsignedAdd(String s1, String s2) {
-        adder.setOperand(s1, s2);
-        return adder.calculate('0');
+        return adder.setOperand(s1, s2).calculate('0');
     }
 
     private String unsignedSub(String s1, String s2) {
         s2 = StringGenerator.getReverse(s2);
-        adder.setOperand(s1, s2);
-        return adder.calculate('1');
+        return adder.setOperand(s1, s2).calculate('1');
     }
 
     protected String sub(String s1, String s2) {
@@ -274,8 +272,7 @@ public class FloatNumber extends ALU {
             String half = sb.substring(0, len);
             String newHalf;
             if (sig2.charAt(i) == '1') {
-                adder.setOperand(half, sig1);
-                newHalf = adder.calculate('0');
+                newHalf = adder.setOperand(half, sig1).calculate('0');
             } else {
                 newHalf = half;
             }

@@ -2,18 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="679bd6c9-6303-4d85-9f56-7f598134cce1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/ALUSimulator.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Representations/DecimalCode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Representations/IntegerComplementCode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Representations/Representation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ALU.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ALU.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Basic/Arithmetic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Basic/Arithmetic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Basic/SerialAdder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Basic/SerialAdder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/DecimalNumber.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DecimalNumber.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/FloatNumber.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/FloatNumber.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/IntegerNumber.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/IntegerNumber.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/DecimalNumberTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/DecimalNumberTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/FloatNumberTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/FloatNumberTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/IntegerNumberTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/IntegerNumberTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/ALU.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ALU.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Basic/SerialAdder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Basic/SerialAdder.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/DecimalNumber.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DecimalNumber.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/IntegerNumber.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/IntegerNumber.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main.class" afterDir="false" />
@@ -33,8 +33,29 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/ALU.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="45" selection-start-line="45" selection-end-line="45" />
+            <state relative-caret-position="-116">
+              <caret line="26" column="20" selection-start-line="26" selection-start-column="20" selection-end-line="26" selection-end-column="20" />
+              <folding>
+                <element signature="e#271#272#0" expanded="true" />
+                <element signature="e#323#324#0" expanded="true" />
+                <element signature="e#525#526#0" expanded="true" />
+                <element signature="e#570#571#0" expanded="true" />
+                <element signature="e#597#598#0" expanded="true" />
+                <element signature="e#642#643#0" expanded="true" />
+                <element signature="e#671#672#0" expanded="true" />
+                <element signature="e#719#720#0" expanded="true" />
+                <element signature="e#854#855#0" expanded="true" />
+                <element signature="e#897#898#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Basic/SerialAdder.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="445">
+              <caret line="27" column="53" lean-forward="true" selection-start-line="27" selection-start-column="53" selection-end-line="27" selection-end-column="53" />
             </state>
           </provider>
         </entry>
@@ -42,8 +63,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/DecimalNumberTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="96">
-              <caret line="4" column="43" lean-forward="true" selection-start-line="4" selection-start-column="43" selection-end-line="4" selection-end-column="43" />
+            <state relative-caret-position="436">
+              <caret line="34" column="62" selection-start-line="34" selection-start-column="62" selection-end-line="34" selection-end-column="62" />
             </state>
           </provider>
         </entry>
@@ -51,9 +72,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/DecimalNumber.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="580">
-              <caret line="119" column="20" selection-start-line="119" selection-start-column="20" selection-end-line="119" selection-end-column="20" />
+            <state relative-caret-position="66">
+              <caret line="92" column="53" selection-start-line="92" selection-start-column="53" selection-end-line="92" selection-end-column="53" />
               <folding>
+                <element signature="e#4079#4080#0" expanded="true" />
+                <element signature="e#4106#4107#0" expanded="true" />
                 <element signature="e#4175#4176#0" expanded="true" />
                 <element signature="e#4202#4203#0" expanded="true" />
               </folding>
@@ -62,10 +85,15 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Basic/Arithmetic.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/FloatNumber.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="528">
-              <caret line="22" column="50" selection-start-line="22" selection-start-column="50" selection-end-line="22" selection-end-column="50" />
+            <state relative-caret-position="-1308">
+              <caret line="273" column="40" selection-start-line="273" selection-start-column="40" selection-end-line="273" selection-end-column="40" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#8741#8742#0" expanded="true" />
+                <element signature="e#8803#8804#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -73,29 +101,48 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/FloatNumber.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="462">
-              <caret line="172" lean-forward="true" selection-start-line="172" selection-end-line="172" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="96">
+              <caret line="4" column="15" lean-forward="true" selection-start-line="4" selection-start-column="15" selection-end-line="4" selection-end-column="15" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/IntegerNumber.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1676">
+              <caret line="30" column="60" lean-forward="true" selection-start-line="30" selection-start-column="60" selection-end-line="30" selection-end-column="60" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Representations/DecimalCode.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1224">
+              <caret line="56" column="32" selection-start-line="56" selection-start-column="32" selection-end-line="56" selection-end-column="32" />
+              <folding>
+                <element signature="e#182#183#0" expanded="true" />
+                <element signature="e#224#225#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/FloatNumberTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="141">
-              <caret line="79" selection-start-line="79" selection-end-line="79" />
+            <state relative-caret-position="412">
+              <caret line="67" column="28" selection-start-line="67" selection-start-column="28" selection-end-line="67" selection-end-column="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/IntegerNumberTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-60">
+              <caret line="4" column="24" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -110,6 +157,12 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>setOperand</find>
+      <find>set</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -118,17 +171,20 @@
       <list>
         <option value="$PROJECT_DIR$/src/main/java/DemicalNumber.java" />
         <option value="$PROJECT_DIR$/src/main/java/Basic/FullAdder.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Basic/SerialAdder.java" />
-        <option value="$PROJECT_DIR$/src/test/java/DecimalNumberTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/Basic/StringGenerator.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Main.java" />
-        <option value="$PROJECT_DIR$/src/main/java/IntegerNumber.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ALU.java" />
         <option value="$PROJECT_DIR$/src/test/java/IntegerNumberTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/DecimalNumber.java" />
         <option value="$PROJECT_DIR$/src/main/java/Basic/Arithmetic.java" />
-        <option value="$PROJECT_DIR$/src/main/java/FloatNumber.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Main.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Basic/SerialAdder.java" />
+        <option value="$PROJECT_DIR$/src/main/java/IntegerNumber.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Representations/Representation.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Representations/IntegerComplementCode.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Representations/DecimalCode.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ALU.java" />
+        <option value="$PROJECT_DIR$/src/test/java/DecimalNumberTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/FloatNumberTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/DecimalNumber.java" />
+        <option value="$PROJECT_DIR$/src/main/java/FloatNumber.java" />
       </list>
     </option>
   </component>
@@ -149,7 +205,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -200,13 +256,13 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543238092104" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543407378306" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -236,7 +292,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.FloatNumberTest.division">
+  <component name="RunManager" selected="JUnit.FloatNumberTest.multi">
     <configuration name="DecimalNumberTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ALUSimulator" />
       <option name="PACKAGE_NAME" value="" />
@@ -253,46 +309,48 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="FloatNumberTest.division" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="FloatNumberTest.add" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ALUSimulator" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="FloatNumberTest" />
-      <option name="METHOD_NAME" value="division" />
+      <option name="METHOD_NAME" value="add" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="IntegerNumberTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="FloatNumberTest.multi" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ALUSimulator" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="IntegerNumberTest" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="IntegerNumberTest.multi" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ALUSimulator" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="IntegerNumberTest" />
+      <option name="MAIN_CLASS_NAME" value="FloatNumberTest" />
       <option name="METHOD_NAME" value="multi" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="FloatNumberTest.sub" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ALUSimulator" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="FloatNumberTest" />
+      <option name="METHOD_NAME" value="sub" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
-      <item itemvalue="JUnit.IntegerNumberTest" />
       <item itemvalue="JUnit.DecimalNumberTest" />
+      <item itemvalue="JUnit.FloatNumberTest.sub" />
       <item itemvalue="JUnit.FloatNumberTest" />
-      <item itemvalue="JUnit.IntegerNumberTest.multi" />
-      <item itemvalue="JUnit.FloatNumberTest.division" />
+      <item itemvalue="JUnit.FloatNumberTest.add" />
+      <item itemvalue="JUnit.FloatNumberTest.multi" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.FloatNumberTest.division" />
-        <item itemvalue="JUnit.IntegerNumberTest" />
-        <item itemvalue="JUnit.IntegerNumberTest.multi" />
+        <item itemvalue="JUnit.FloatNumberTest.multi" />
+        <item itemvalue="JUnit.FloatNumberTest.sub" />
+        <item itemvalue="JUnit.FloatNumberTest.add" />
         <item itemvalue="JUnit.DecimalNumberTest" />
         <item itemvalue="JUnit.FloatNumberTest" />
       </list>
@@ -320,6 +378,8 @@
       <workItem from="1543223666724" duration="44000" />
       <workItem from="1543223716094" duration="26000" />
       <workItem from="1543235739853" duration="2378000" />
+      <workItem from="1543315458966" duration="6720000" />
+      <workItem from="1543405295105" duration="2022000" />
     </task>
     <task id="LOCAL-00001" summary="补充了一些注释和javadoc文档">
       <created>1542695986061</created>
@@ -363,43 +423,50 @@
       <option name="project" value="LOCAL" />
       <updated>1543221547530</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="浮点数的除法就是个弟弟，就酱。。。。&#10;&#10;还未完善测试用例（非规格化数、0、正负无穷什么的。。。">
+      <created>1543315514383</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1543315514383</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="FloatNumberTest_division - 2018.11.26 at 21h 04m 14s.xml">
+    <history-entry file="FloatNumberTest_sub - 2018.11.27 at 19h 19m 59s.xml">
+      <configuration name="FloatNumberTest.sub" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="FloatNumberTest_multi - 2018.11.27 at 19h 20m 08s.xml">
+      <configuration name="FloatNumberTest.multi" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="FloatNumberTest_division - 2018.11.27 at 19h 20m 15s.xml">
       <configuration name="FloatNumberTest.division" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="FloatNumberTest_division - 2018.11.26 at 21h 05m 17s.xml">
+    <history-entry file="IntegerNumberTest - 2018.11.27 at 19h 20m 20s.xml">
+      <configuration name="IntegerNumberTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="DecimalNumberTest - 2018.11.27 at 19h 22m 28s.xml">
+      <configuration name="DecimalNumberTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="FloatNumberTest_toDecimal - 2018.11.27 at 19h 25m 42s.xml">
+      <configuration name="FloatNumberTest.toDecimal" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="FloatNumberTest_sub - 2018.11.27 at 19h 25m 56s.xml">
+      <configuration name="FloatNumberTest.sub" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="FloatNumberTest_division - 2018.11.28 at 17h 56m 45s.xml">
       <configuration name="FloatNumberTest.division" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="FloatNumberTest_division - 2018.11.26 at 21h 05m 24s.xml">
-      <configuration name="FloatNumberTest.division" configurationId="JUnit" />
+    <history-entry file="FloatNumberTest - 2018.11.28 at 20h 09m 00s.xml">
+      <configuration name="FloatNumberTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="FloatNumberTest_division - 2018.11.26 at 21h 05m 50s.xml">
-      <configuration name="FloatNumberTest.division" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="FloatNumberTest_division - 2018.11.26 at 21h 05m 58s.xml">
-      <configuration name="FloatNumberTest.division" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="FloatNumberTest_division - 2018.11.26 at 21h 06m 37s.xml">
-      <configuration name="FloatNumberTest.division" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="FloatNumberTest_division - 2018.11.26 at 21h 06m 50s.xml">
-      <configuration name="FloatNumberTest.division" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="FloatNumberTest_division - 2018.11.26 at 21h 07m 16s.xml">
-      <configuration name="FloatNumberTest.division" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="FloatNumberTest_division - 2018.11.26 at 21h 07m 47s.xml">
-      <configuration name="FloatNumberTest.division" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="FloatNumberTest_division - 2018.11.26 at 21h 13m 14s.xml">
-      <configuration name="FloatNumberTest.division" configurationId="JUnit" />
+    <history-entry file="DecimalNumberTest - 2018.11.28 at 20h 09m 26s.xml">
+      <configuration name="DecimalNumberTest" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="42275000" />
+    <option name="totallyTimeSpent" value="51017000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -414,7 +481,7 @@
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23819743" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2453505" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -428,7 +495,7 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32923833" />
-      <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32923833" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="9" weight="0.32923833" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
@@ -456,7 +523,8 @@
     <MESSAGE value="完善了浮点数的十进制与二进制相互转化的方法" />
     <MESSAGE value="初步完成浮点数相加减的方法（自闭了）&#10;&#10;还未完善测试用例（非规格化数、0、正负无穷什么的。。。" />
     <MESSAGE value="初步完成浮点数相乘的方法，一般会产生细微的误差，可接受范围内的&#10;&#10;还未完善测试用例（非规格化数、0、正负无穷什么的。。。" />
-    <option name="LAST_COMMIT_MESSAGE" value="初步完成浮点数相乘的方法，一般会产生细微的误差，可接受范围内的&#10;&#10;还未完善测试用例（非规格化数、0、正负无穷什么的。。。" />
+    <MESSAGE value="浮点数的除法就是个弟弟，就酱。。。。&#10;&#10;还未完善测试用例（非规格化数、0、正负无穷什么的。。。" />
+    <option name="LAST_COMMIT_MESSAGE" value="浮点数的除法就是个弟弟，就酱。。。。&#10;&#10;还未完善测试用例（非规格化数、0、正负无穷什么的。。。" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/test/java/Test.java" />
@@ -484,63 +552,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Basic/SerialAdder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="5" column="67" selection-start-line="5" selection-start-column="67" selection-end-line="5" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ALU.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="45" selection-start-line="45" selection-end-line="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/DecimalNumber.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="580">
-          <caret line="119" column="20" selection-start-line="119" selection-start-column="20" selection-end-line="119" selection-end-column="20" />
-          <folding>
-            <element signature="e#4175#4176#0" expanded="true" />
-            <element signature="e#4202#4203#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/DecimalNumberTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="4" column="43" lean-forward="true" selection-start-line="4" selection-start-column="43" selection-end-line="4" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/IntegerNumber.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2400">
-          <caret line="100" column="24" selection-start-line="100" selection-start-column="24" selection-end-line="100" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Basic/FullAdder.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="192">
           <caret line="8" column="43" selection-start-line="8" selection-start-column="43" selection-end-line="8" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/IntegerNumberTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-458">
-          <caret line="4" column="24" lean-forward="true" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
         </state>
       </provider>
     </entry>
@@ -551,20 +566,142 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/FloatNumberTest.java">
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-11.0.1.jdk/Contents/Home/lib/src.zip!/java.base/java/lang/AbstractStringBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="79" selection-start-line="79" selection-end-line="79" />
+        <state relative-caret-position="256">
+          <caret line="771" column="33" selection-start-line="771" selection-start-column="33" selection-end-line="771" selection-end-column="33" />
+          <folding>
+            <element signature="e#18598#18599#0" expanded="true" />
+            <element signature="e#18648#18649#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-11.0.1.jdk/Contents/Home/lib/src.zip!/java.base/java/lang/StringBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="246" selection-start-line="246" selection-end-line="246" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Representations/IntegerComplementCode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="16" column="20" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
+          <folding>
+            <element signature="e#118#119#0" expanded="true" />
+            <element signature="e#145#146#0" expanded="true" />
+            <element signature="e#178#179#0" expanded="true" />
+            <element signature="e#205#206#0" expanded="true" />
+            <element signature="e#271#272#0" expanded="true" />
+            <element signature="e#298#299#0" expanded="true" />
+            <element signature="e#363#364#0" expanded="true" />
+            <element signature="e#390#391#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Representations/Representation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="6" column="25" selection-start-line="6" selection-start-column="25" selection-end-line="6" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Representations/DecimalCode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1224">
+          <caret line="56" column="32" selection-start-line="56" selection-start-column="32" selection-end-line="56" selection-end-column="32" />
+          <folding>
+            <element signature="e#182#183#0" expanded="true" />
+            <element signature="e#224#225#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="4" column="15" lean-forward="true" selection-start-line="4" selection-start-column="15" selection-end-line="4" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/IntegerNumber.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1676">
+          <caret line="30" column="60" lean-forward="true" selection-start-line="30" selection-start-column="60" selection-end-line="30" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Basic/SerialAdder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="445">
+          <caret line="27" column="53" lean-forward="true" selection-start-line="27" selection-start-column="53" selection-end-line="27" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/IntegerNumberTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-60">
+          <caret line="4" column="24" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/DecimalNumberTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="436">
+          <caret line="34" column="62" selection-start-line="34" selection-start-column="62" selection-end-line="34" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ALU.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-116">
+          <caret line="26" column="20" selection-start-line="26" selection-start-column="20" selection-end-line="26" selection-end-column="20" />
+          <folding>
+            <element signature="e#271#272#0" expanded="true" />
+            <element signature="e#323#324#0" expanded="true" />
+            <element signature="e#525#526#0" expanded="true" />
+            <element signature="e#570#571#0" expanded="true" />
+            <element signature="e#597#598#0" expanded="true" />
+            <element signature="e#642#643#0" expanded="true" />
+            <element signature="e#671#672#0" expanded="true" />
+            <element signature="e#719#720#0" expanded="true" />
+            <element signature="e#854#855#0" expanded="true" />
+            <element signature="e#897#898#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/DecimalNumber.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="92" column="53" selection-start-line="92" selection-start-column="53" selection-end-line="92" selection-end-column="53" />
+          <folding>
+            <element signature="e#4079#4080#0" expanded="true" />
+            <element signature="e#4106#4107#0" expanded="true" />
+            <element signature="e#4175#4176#0" expanded="true" />
+            <element signature="e#4202#4203#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/FloatNumber.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="172" lean-forward="true" selection-start-line="172" selection-end-line="172" />
+        <state relative-caret-position="-1308">
+          <caret line="273" column="40" selection-start-line="273" selection-start-column="40" selection-end-line="273" selection-end-column="40" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#8741#8742#0" expanded="true" />
+            <element signature="e#8803#8804#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/FloatNumberTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="412">
+          <caret line="67" column="28" selection-start-line="67" selection-start-column="28" selection-end-line="67" selection-end-column="28" />
         </state>
       </provider>
     </entry>

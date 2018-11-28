@@ -16,10 +16,11 @@ public class SerialAdder {                 // 单件模式，全局只有一个�
 
     private SerialAdder(){}
 
-    public void setOperand(String n1, String n2) {
+    public SerialAdder setOperand(String n1, String n2) {
         s1 = n1.toCharArray();
         s2 = n2.toCharArray();
         adders = new FullAdder[s1.length];
+        return this;
     }
 
     /**

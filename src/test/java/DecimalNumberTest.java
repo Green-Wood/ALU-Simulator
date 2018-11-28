@@ -18,14 +18,10 @@ public class DecimalNumberTest {
 
     @org.junit.Test
     public void add() {
-        test.setOperand("98", "1");
-        assertEquals("99", test.add());
-        test.setOperand("-100", "100");
-        assertEquals("0", test.add());
-        test.setOperand("-7", "-13");
-        assertEquals("-20", test.add());
-        test.setOperand("32", "-48");
-        assertEquals("-16", test.add());
+        assertEquals("99", test.setOperand("98", "1").add());
+        assertEquals("0", test.setOperand("-100", "100").add());
+        assertEquals("-20", test.setOperand("-7", "-13").add());
+        assertEquals("-16", test.setOperand("32", "-48").add());
         int ran1 = (int) (Math.random() * -1000 + 500);
         int ran2 = (int) (Math.random() * -1000 + 500);
         test.setOperand(String.valueOf(ran1), String.valueOf(ran2));
@@ -34,14 +30,10 @@ public class DecimalNumberTest {
 
     @org.junit.Test
     public void sub() {
-        test.setOperand("48", "21");
-        assertEquals("27", test.sub());
-        test.setOperand("-100", "100");
-        assertEquals("-200", test.sub());
-        test.setOperand("-7", "-13");
-        assertEquals("6", test.sub());
-        test.setOperand("32", "-48");
-        assertEquals("80", test.sub());
+        assertEquals("27", test.setOperand("48", "21").sub());
+        assertEquals("-200", test.setOperand("-100", "100").sub());
+        assertEquals("6", test.setOperand("-7", "-13").sub());
+        assertEquals("80", test.setOperand("32", "-48").sub());
         int ran1 = (int) (Math.random() * -1000 + 500);
         int ran2 = (int) (Math.random() * -1000 + 500);
         test.setOperand(String.valueOf(ran1), String.valueOf(ran2));

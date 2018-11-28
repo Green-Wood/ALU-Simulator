@@ -9,8 +9,6 @@ import Basic.*;
  */
 public class DecimalNumber extends ALU {
 
-    private char preC;          // 检测是否产生进位
-
     @Override
     protected String toDecimal(String bin) {               // 二进制转十进制
         StringBuilder decimal = new StringBuilder();
@@ -66,14 +64,13 @@ public class DecimalNumber extends ALU {
     private String unsignedNumberAdd(String s1, String s2) {                 // 可看作是无符号数的相加，结果与s1的符号相同
         StringBuilder sb = new StringBuilder();
         sb.append(s1.charAt(0));
-        preC = '0';
+        char preC = '0';
         for (int i = 29; i >= 1; i -= 4) {
             adder.setOperand(s1.substring(i, i + 4), s2.substring(i, i + 4));
             String ans = adder.calculate(preC);
             preC = adder.nextC;
             if (preC == '1' || (ans.charAt(0) == '1' && (ans.charAt(1) == '1' || ans.charAt(2) == '1'))) {
-                adder.setOperand(ans, "0110");
-                ans = adder.calculate('0');
+                ans = adder.setOperand(ans, "0110").calculate('0');
                 preC = Arithmetic.OR(adder.nextC, preC);
             }
             sb.insert(1, ans);
@@ -84,7 +81,7 @@ public class DecimalNumber extends ALU {
     private String unsignedNumberSub(String s1, String s2) {              // 可看作是无符号数的相减，如果结果产生进位，证明减成功
         s2 = reverse(s2);                                        // 若没有产生进位，则需要对结果进行"取反加一"
         String ans = unsignedNumberAdd(s1, s2);
-        if (preC == '0') {
+        if (adder.nextC == '0') {
             ans = reverse(ans);
         }
         return ans;
@@ -94,8 +91,7 @@ public class DecimalNumber extends ALU {
         StringBuilder reverse = new StringBuilder();
         for (int i = 1; i < 33; i += 4) {
             String subString = s.substring(i, i + 4);
-            adder.setOperand(subString, "0110");
-            subString = adder.calculate('0');
+            subString = adder.setOperand(subString, "0110").calculate('0');
             for (int j = 0; j < subString.length(); j++) {
                 if (subString.charAt(j) == '0') reverse.append('1');
                 else reverse.append('0');
