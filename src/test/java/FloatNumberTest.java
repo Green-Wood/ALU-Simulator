@@ -35,7 +35,6 @@ public class FloatNumberTest {
         assertEquals(String.valueOf((float) -120), test.setOperand("-20", "-100").add());
         float ran1 = (float) (Math.random() * -1000 + 500);
         float ran2 = (float) (Math.random() * -1000 + 500);
-        System.out.println(ran1 + "    " + ran2);
         test.setOperand(String.valueOf(ran1), String.valueOf(ran2));
         assertEquals(String.valueOf(ran1 + ran2), test.add());
     }
@@ -59,18 +58,21 @@ public class FloatNumberTest {
         assertEquals(String.valueOf((float) 567), test.setOperand("27", "21").multi());
         float ran1 = (float) (Math.random() * -100 + 50);
         float ran2 = (float) (Math.random() * -100 + 50);
-        System.out.println(ran1 + "    " + ran2);
         test.setOperand(String.valueOf(ran1), String.valueOf(ran2));
-        assertEquals(String.valueOf(ran1 * ran2), test.multi());
+        float expect = ran1 * ran2;
+        float actual = Float.valueOf(test.multi());
+        System.out.printf("Ran1: %f   Ran2: %f\nExpect: %f   Actual: %f\n", ran1, ran2, expect, actual);
+        assertTrue(Math.abs(expect - actual) < 0.00001);
     }
 
     @Test
     public void division() {
-        assertEquals(String.valueOf((float) 12/17), test.setOperand("12", "17").division());
         float ran1 = (float) (Math.random() * -100 + 50);
         float ran2 = (float) (Math.random() * -100 + 50);
-        System.out.println(ran1 + "    " + ran2);
         test.setOperand(String.valueOf(ran1), String.valueOf(ran2));
-        assertEquals(String.valueOf(ran1 / ran2), test.division());
+        float expect = ran1 / ran2;
+        float actual = Float.valueOf(test.division());
+        System.out.printf("Ran1: %f   Ran2: %f\nExpect: %f   Actual: %f\n", ran1, ran2, expect, actual);
+        assertTrue(Math.abs(expect - actual) < 0.000001);
     }
 }

@@ -324,22 +324,21 @@ public class FloatNumber extends ALU {
         }
 
         int len = sig1.length();
-        StringBuilder sb = new StringBuilder(sig1);
+        StringBuilder sb = new StringBuilder();
         ALU integer = new IntegerNumber();
         for (int i = 0; i < len; i++) {
             adder.nextC = '0';
-            String half = sb.substring(0, len);
-            String newHalf = integer.sub(half, sig2);
+            String afterSub = integer.sub(sig1, sig2);
             if (adder.nextC == '0') {      // 不够减
                 sb.append('0');
             } else {
-                sb.replace(0, len, newHalf);
+                sig1 = afterSub;
                 sb.append('1');
             }
             sig2 = "0" + sig2.substring(0, sig2.length()-1);      // 只能右移除数，而不能左移被除数
         }
 
-        String ansSignificant = sb.substring(len);
+        String ansSignificant = sb.toString();
         int offset = ansSignificant.indexOf("1");
         for (int i = 0; i < offset; i++) {
             decimalExponent--;
