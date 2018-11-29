@@ -324,18 +324,19 @@ public class FloatNumber extends ALU {
         }
 
         int len = sig1.length();
-        StringBuilder sb = new StringBuilder(sig1 + StringGenerator.repeat('0', len));
+        StringBuilder sb = new StringBuilder(sig1);
         ALU integer = new IntegerNumber();
         for (int i = 0; i < len; i++) {
             adder.nextC = '0';
             String half = sb.substring(0, len);
             String newHalf = integer.sub(half, sig2);
             if (adder.nextC == '0') {      // 不够减
-                newHalf = half;
+                sb.append('0');
+            } else {
+                sb.replace(0, len, newHalf);
+                sb.append('1');
             }
-            sb.replace(0, len, newHalf);
-            sb.deleteCharAt(0);
-            sb.append(adder.nextC);
+            sig2 = "0" + sig2.substring(0, sig2.length()-1);      // 只能右移除数，而不能左移被除数
         }
 
         String ansSignificant = sb.substring(len);

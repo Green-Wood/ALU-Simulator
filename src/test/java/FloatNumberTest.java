@@ -66,11 +66,11 @@ public class FloatNumberTest {
 
     @Test
     public void division() {
-        assertEquals(String.valueOf((float) 17/12), test.setOperand("17", "12").division());
-//        float ran1 = (float) (Math.random() * -100 + 50);
-//        float ran2 = (float) (Math.random() * -100 + 50);
-//        System.out.println(ran1 + "    " + ran2);
-//        test.setOperand(String.valueOf(ran1), String.valueOf(ran2));
-//        assertEquals(String.valueOf(ran1 / ran2), test.division());
+        assertEquals(String.valueOf((float) 12/17), test.setOperand("12", "17").division());
+        float ran1 = (float) (Math.random() * -100 + 50);
+        float ran2 = (float) (Math.random() * -100 + 50);
+        System.out.println(ran1 + "    " + ran2);
+        test.setOperand(String.valueOf(ran1), String.valueOf(ran2));
+        assertEquals(String.valueOf(ran1 / ran2), test.division());
     }
 }
