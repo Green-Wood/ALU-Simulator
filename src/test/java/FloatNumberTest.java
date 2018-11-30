@@ -36,7 +36,10 @@ public class FloatNumberTest {
         float ran1 = (float) (Math.random() * -1000 + 500);
         float ran2 = (float) (Math.random() * -1000 + 500);
         test.setOperand(String.valueOf(ran1), String.valueOf(ran2));
-        assertEquals(String.valueOf(ran1 + ran2), test.add());
+        float expect = ran1 + ran2;
+        float actual = Float.valueOf(test.add());
+        System.out.printf("ADD:\nRan1: %f   Ran2: %f\nExpect: %f   Actual: %f\n", ran1, ran2, expect, actual);
+        assertTrue(Math.abs(expect - actual) < 0.0001);
     }
 
     @Test
@@ -45,9 +48,11 @@ public class FloatNumberTest {
         assertEquals("-0.1875", test.setOperand("0.625", "0.8125").sub());
         float ran1 = (float) (Math.random() * -1000 + 500);
         float ran2 = (float) (Math.random() * -1000 + 500);
-        System.out.println(ran1 + "    " + ran2);
         test.setOperand(String.valueOf(ran1), String.valueOf(ran2));
-        assertEquals(String.valueOf(ran1 - ran2), test.sub());
+        float expect = ran1 - ran2;
+        float actual = Float.valueOf(test.sub());
+        System.out.printf("SUB:\nRan1: %f   Ran2: %f\nExpect: %f   Actual: %f\n", ran1, ran2, expect, actual);
+        assertTrue(Math.abs(expect - actual) < 0.0001);
     }
 
     @Test
@@ -61,8 +66,8 @@ public class FloatNumberTest {
         test.setOperand(String.valueOf(ran1), String.valueOf(ran2));
         float expect = ran1 * ran2;
         float actual = Float.valueOf(test.multi());
-        System.out.printf("Ran1: %f   Ran2: %f\nExpect: %f   Actual: %f\n", ran1, ran2, expect, actual);
-        assertTrue(Math.abs(expect - actual) < 0.00001);
+        System.out.printf("MULTI:\nRan1: %f   Ran2: %f\nExpect: %f   Actual: %f\n", ran1, ran2, expect, actual);
+        assertTrue(Math.abs(expect - actual) < 0.0001);
     }
 
     @Test
@@ -72,7 +77,7 @@ public class FloatNumberTest {
         test.setOperand(String.valueOf(ran1), String.valueOf(ran2));
         float expect = ran1 / ran2;
         float actual = Float.valueOf(test.division());
-        System.out.printf("Ran1: %f   Ran2: %f\nExpect: %f   Actual: %f\n", ran1, ran2, expect, actual);
-        assertTrue(Math.abs(expect - actual) < 0.000001);
+        System.out.printf("DIVISION:\nRan1: %f   Ran2: %f\nExpect: %f   Actual: %f\n", ran1, ran2, expect, actual);
+        assertTrue(Math.abs(expect - actual) < 0.0001);
     }
 }

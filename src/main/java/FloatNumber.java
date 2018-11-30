@@ -4,6 +4,30 @@ import Basic.StringGenerator;
 
 public class FloatNumber extends ALU {
 
+    private String exponent1;
+    private String exponent2;
+    private String sig1;
+    private String sig2;
+
+    private void initalize(String s1, String s2) {
+        exponent1 = s1.substring(1, 9);
+        String fractionSignificant = s1.substring(9);
+        if (isAllZero(exponent1)) {
+            sig1 = "0" + fractionSignificant;
+            exponent1 = "00000001";
+        } else {
+            sig1 = "1" + fractionSignificant;
+        }
+        exponent2 = s2.substring(1, 9);
+        fractionSignificant = s2.substring(9);
+        if (isAllZero(exponent2)) {
+            sig2 = "0" + fractionSignificant;
+            exponent2 = "00000001";
+        } else {
+            sig2 = "1" + fractionSignificant;
+        }
+    }
+
     protected String toDecimal(String bin) {
         String binaryExponent = bin.substring(1, 9);
         String binarySignificant = bin.substring(9, 32);
@@ -63,19 +87,6 @@ public class FloatNumber extends ALU {
         return decimalValue;
     }
 
-    private boolean isAllOne(String bin) {
-        for (int i = 0; i < bin.length(); i++) {
-            if (bin.charAt(i) != '1') return false;
-        }
-        return true;
-    }
-
-    private boolean isAllZero(String bin) {
-        for (int i = 0; i < bin.length(); i++) {
-            if (bin.charAt(i) != '0') return false;
-        }
-        return true;
-    }
 
     protected String toBinary(String n) {
         if (n.equals("NaN")) {
@@ -152,24 +163,24 @@ public class FloatNumber extends ALU {
         return bin;
     }
 
+    public static boolean isAllOne(String bin) {
+        for (int i = 0; i < bin.length(); i++) {
+            if (bin.charAt(i) != '1') return false;
+        }
+        return true;
+    }
+
+    public static boolean isAllZero(String bin) {
+        for (int i = 0; i < bin.length(); i++) {
+            if (bin.charAt(i) != '0') return false;
+        }
+        return true;
+    }
+
     protected String add(String s1, String s2) {
         if (toDecimal(s1).equals("0")) return s2;
         if (toDecimal(s2).equals("0")) return s1;
-        String exponent1 = s1.substring(1, 9);
-        String sig1 = s1.substring(9);
-        if (isAllZero(exponent1)) {
-            sig1 = "0" + sig1;
-            exponent1 = "00000001";
-        }
-        else sig1 = "1" + sig1;
-        String exponent2 = s2.substring(1, 9);
-        String sig2 = s2.substring(9);
-        if (isAllZero(exponent2)) {
-            sig2 = "0" + sig2;
-            exponent2 = "00000001";
-        }
-        else sig2 = "1" +sig2;
-
+        initalize(s1, s2);
 
         if (!exponent1.equals(exponent2)) {        // 对齐指数
             int exponentValue1 = Integer.valueOf(exponent1, 2);
@@ -244,20 +255,7 @@ public class FloatNumber extends ALU {
 
     protected String multi(String s1, String s2) {
         if (toDecimal(s1).equals("0") || toDecimal(s2).equals("0")) return toBinary("0");
-        String exponent1 = s1.substring(1, 9);
-        String sig1 = s1.substring(9);
-        if (isAllZero(exponent1)) {
-            sig1 = "0" + sig1;
-            exponent1 = "00000001";
-        }
-        else sig1 = "1" + sig1;
-        String exponent2 = s2.substring(1, 9);
-        String sig2 = s2.substring(9);
-        if (isAllZero(exponent2)) {
-            sig2 = "0" + sig2;
-            exponent2 = "00000001";
-        }
-        else sig2 = "1" +sig2;
+        initalize(s1, s2);
 
         int decimalExponent = Integer.valueOf(exponent1, 2) + Integer.valueOf(exponent2, 2) - 127*2;
         if (decimalExponent >= 128) {
@@ -302,20 +300,7 @@ public class FloatNumber extends ALU {
             else return toBinary("plus infinity");
         }
 
-        String exponent1 = s1.substring(1, 9);
-        String sig1 = s1.substring(9);
-        if (isAllZero(exponent1)) {
-            sig1 = "0" + sig1;
-            exponent1 = "00000001";
-        }
-        else sig1 = "1" + sig1;
-        String exponent2 = s2.substring(1, 9);
-        String sig2 = s2.substring(9);
-        if (isAllZero(exponent2)) {
-            sig2 = "0" + sig2;
-            exponent2 = "00000001";
-        }
-        else sig2 = "1" +sig2;
+        initalize(s1, s2);
 
         int decimalExponent = Integer.valueOf(exponent1, 2) - Integer.valueOf(exponent2, 2);
         if (decimalExponent >= 128) {

@@ -8,7 +8,7 @@ import Basic.SerialAdder;
  * @author greenwood
  */
 public abstract class ALU {
-    private String n1, n2;
+    String n1, n2;
 
     String remainder;
 

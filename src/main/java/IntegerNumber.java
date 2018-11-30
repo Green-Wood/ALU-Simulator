@@ -16,12 +16,8 @@ public class IntegerNumber extends ALU{
 
     @Override
     protected String sub(String s1, String s2){          // 两个二进制数相减，返回一个二进制数
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < s2.length(); i++){         // s2 取反
-            if (s2.charAt(i) == '0') sb.append('1');
-            else sb.append('0');
-        }
-        adder.setOperand(s1, sb.toString());
+        s2 = StringGenerator.getReverse(s2);
+        adder.setOperand(s1, s2);
         return adder.calculate('1');
     }
 
@@ -51,24 +47,23 @@ public class IntegerNumber extends ALU{
         String bin = sb.substring(sb.length()-32);      // 从倒数第二位开始
         return bin;
     }
+
     @Override
-    protected String division(String s1, String s2){        // 将除法的结果保存在两个实例变量中，quo商，re余数
-        String dividend = s1;
-        String divisor = s2;
-        char diSign = divisor.charAt(0);
-        char reSign = dividend.charAt(0);                    // remainder sign
+    protected String division(String s1, String s2){        // 将除法的余数保存在remainder中
+        char diSign = s2.charAt(0);
+        char reSign = s1.charAt(0);                    // remainder sign
         StringBuilder sb;
-        if (reSign == '0') sb = new StringBuilder(StringGenerator.repeat('0', 32) + dividend);  // 根据符号添加
-        else sb = new StringBuilder(StringGenerator.repeat('1', 32) + dividend);
+        if (reSign == '0') sb = new StringBuilder(StringGenerator.repeat('0', 32) + s1);  // 根据符号添加
+        else sb = new StringBuilder(StringGenerator.repeat('1', 32) + s1);
         char addQ = '1';
         for (int i = 0; i < 33; i++){
             reSign = sb.charAt(0);
             String half = sb.substring(0, 32);
             String newHalf;
             if (reSign == diSign){                          // 如果remainder符号与divisor相同则相减，否则相加
-                newHalf = sub(half, divisor);
+                newHalf = sub(half, s2);
             } else {
-                newHalf = add(half, divisor);
+                newHalf = add(half, s2);
             }
             reSign = newHalf.charAt(0);
             sb.replace(0, 32, newHalf);               // 替换新的左半边
@@ -85,16 +80,16 @@ public class IntegerNumber extends ALU{
         String remainder = sb.substring(0, 32);
         String quotient = sb.substring(32, sb.length());
         quotient = quotient.substring(1) + addQ;                    // left shift quotient
-        if (quotient.charAt(0) == '1'){                             // if quotient is negative, add 1
+        if (quotient.charAt(0) == '1') {                             // if quotient is negative, add 1
             quotient = add(StringGenerator.repeat('0', 31) + "1" , quotient);
         }
         // 对余数的结果进行修正
-        if (reSign != dividend.charAt(0)){
-            if (dividend.charAt(0) == diSign){                           // 如果被除数为正，余数为负
-                remainder = add(remainder, divisor);
+        if (reSign != s1.charAt(0)) {
+            if (s1.charAt(0) == diSign) {                           // 如果被除数为正，余数为负
+                remainder = add(remainder, s2);
             }
             else  {                                                     // 如果被除数为负，余数为正
-                remainder = sub(remainder, divisor);
+                remainder = sub(remainder, s2);
             }
         }
         this.remainder = remainder;
@@ -102,7 +97,7 @@ public class IntegerNumber extends ALU{
     }
 
     @Override
-    protected String toBinary(String n){         // 将整数转为32位二进制数
+    protected String toBinary(String n) {         // 将整数转为32位二进制数
         int num = Integer.parseInt(n);
         String origin =  Integer.toBinaryString(num);
         StringBuilder sb = new StringBuilder();
@@ -114,7 +109,7 @@ public class IntegerNumber extends ALU{
     }
 
     @Override
-    protected String toDecimal(String bin){          // 将32位二进制转为十进制
+    protected String toDecimal(String bin) {          // 将32位二进制转为十进制
         char[] b = bin.toCharArray();
         long n = -1 * (b[0] - '0') * (long) Math.pow(2, 31);        // pow(2, 31)导致int值溢出，因此使用long
         for (int i = 1; i < 32; i++){
