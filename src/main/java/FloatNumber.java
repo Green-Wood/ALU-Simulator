@@ -9,7 +9,13 @@ public class FloatNumber extends ALU {
     private String sig1;
     private String sig2;
 
-    private void initalize(String s1, String s2) {
+    /**
+     *
+     * @param s1
+     * @param s2
+     * Given two binary 0/1 operand to generate suitable exponent and significand
+     */
+    private void initialize(String s1, String s2) {
         exponent1 = s1.substring(1, 9);
         String fractionSignificant = s1.substring(9);
         if (isAllZero(exponent1)) {
@@ -180,7 +186,7 @@ public class FloatNumber extends ALU {
     protected String add(String s1, String s2) {
         if (toDecimal(s1).equals("0")) return s2;
         if (toDecimal(s2).equals("0")) return s1;
-        initalize(s1, s2);
+        initialize(s1, s2);
 
         if (!exponent1.equals(exponent2)) {        // 对齐指数
             int exponentValue1 = Integer.valueOf(exponent1, 2);
@@ -255,7 +261,7 @@ public class FloatNumber extends ALU {
 
     protected String multi(String s1, String s2) {
         if (toDecimal(s1).equals("0") || toDecimal(s2).equals("0")) return toBinary("0");
-        initalize(s1, s2);
+        initialize(s1, s2);
 
         int decimalExponent = Integer.valueOf(exponent1, 2) + Integer.valueOf(exponent2, 2) - 127*2;
         if (decimalExponent >= 128) {
@@ -300,7 +306,7 @@ public class FloatNumber extends ALU {
             else return toBinary("plus infinity");
         }
 
-        initalize(s1, s2);
+        initialize(s1, s2);
 
         int decimalExponent = Integer.valueOf(exponent1, 2) - Integer.valueOf(exponent2, 2);
         if (decimalExponent >= 128) {

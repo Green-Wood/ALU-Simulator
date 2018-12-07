@@ -33,6 +33,7 @@ public class FloatNumberTest {
         assertEquals(String.valueOf((float) 2), test.setOperand("1", "1").add());
         assertEquals("0", test.setOperand("1", "-1").add());
         assertEquals(String.valueOf((float) -120), test.setOperand("-20", "-100").add());
+        assertEquals(String.valueOf((float) -60), test.setOperand("20", "-80").add());
         float ran1 = (float) (Math.random() * -1000 + 500);
         float ran2 = (float) (Math.random() * -1000 + 500);
         test.setOperand(String.valueOf(ran1), String.valueOf(ran2));
