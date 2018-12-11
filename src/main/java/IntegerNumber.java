@@ -100,12 +100,31 @@ public class IntegerNumber extends ALU{
     protected String toBinary(String n) {         // 将整数转为32位二进制数
         int num = Integer.parseInt(n);
         String origin =  Integer.toBinaryString(num);
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < 32 - origin.length(); i++){
-            sb.append('0');
+        StringBuilder sb = new StringBuilder(origin);
+        while (sb.length() != 32) {
+            sb.insert(0, '0');
         }
-        sb.append(origin);
         return sb.toString();
+    }
+
+    String handyToBinary(String n) {           // 手动实现
+        int num = Integer.parseInt(n);
+        boolean isNeg = num < 0;
+        if (isNeg) num = -num;
+        StringBuilder sb = new StringBuilder();
+        while (num != 0) {
+            sb.insert(0, num % 2);
+            num /= 2;
+        }
+        while (sb.length() != 32) {
+            sb.insert(0, '0');
+        }
+        String ans = sb.toString();
+        if (isNeg) {
+            ans = StringGenerator.getReverse(ans);
+            ans = adder.setOperand(ans, StringGenerator.repeat('0', 32)).calculate('1');
+        }
+        return ans;
     }
 
     @Override

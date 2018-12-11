@@ -70,13 +70,13 @@ public class FloatNumber extends ALU {
     }
 
     private int readBinaryExponent(String binaryExponent) {
-        int decimalvalue = 0;
+        int decimalValue = 0;
         for (int i = 0; i < binaryExponent.length(); i++) {
-            decimalvalue  = decimalvalue << 1;
-            if (binaryExponent.charAt(i) == '1') decimalvalue += 1;
+            decimalValue  = decimalValue << 1;
+            if (binaryExponent.charAt(i) == '1') decimalValue += 1;
         }
-        decimalvalue -= 127;
-        return decimalvalue;
+        decimalValue -= 127;
+        return decimalValue;
     }
 
     private float readBinarySignificant(String binarySignificant, boolean isNormalized) {
@@ -206,7 +206,7 @@ public class FloatNumber extends ALU {
 
         String ansSignificant;                                          //   计算带符号数之和
         String ansExponent = exponent1;
-        String ansSign = s1.substring(0, 1);
+        char ansSign = s1.charAt(0);
         if (s1.charAt(0) == s2.charAt(0)) {
             ansSignificant = unsignedAdd(sig1, sig2);
             if (adder.nextC == '1') {                      // 处理尾数相加溢出
@@ -214,7 +214,7 @@ public class FloatNumber extends ALU {
                 adder.setOperand(ansExponent, StringGenerator.repeat('0', ansExponent.length()));
                 ansExponent = adder.calculate('1');
                 if (isAllZero(ansExponent)) {               // 处理指数溢出
-                    if (ansSign.equals("0")) return toBinary("plus infinity");
+                    if (ansSign == '0') return toBinary("plus infinity");
                     else return toBinary("minus infinity");
                 }
             }
@@ -224,8 +224,7 @@ public class FloatNumber extends ALU {
             ansSignificant = unsignedSub(sig1, sig2);
             if (isAllZero(ansSignificant)) return toBinary("0");    // 处理相减为0
             if (adder.nextC != '1') {
-                if (ansSign.equals("1")) ansSign = "0";
-                else ansSign = "1";
+                ansSign = Arithmetic.NOT(ansSign);
                 String reverse = StringGenerator.getReverse(ansSignificant);
                 adder.setOperand(reverse, StringGenerator.repeat('0', reverse.length()));
                 ansSignificant = adder.calculate('1');
@@ -254,8 +253,7 @@ public class FloatNumber extends ALU {
     }
 
     protected String sub(String s1, String s2) {
-        if (s2.charAt(0) == '1') s2 = "0" + s2.substring(1);
-        else s2 = "1" + s2.substring(1);
+        s2 = Arithmetic.NOT(s2.charAt(0)) + s2.substring(1);
         return add(s1, s2);
     }
 
@@ -294,7 +292,7 @@ public class FloatNumber extends ALU {
             }
             ansSignificant = ansSignificant.substring(1) + "0";
         }
-        String ansSign = String.valueOf(Arithmetic.XOR(s1.charAt(0), s2.charAt(0)));
+        char ansSign = Arithmetic.XOR(s1.charAt(0), s2.charAt(0));
         String ansExponent = toBinaryExponent(String.valueOf(decimalExponent));
         return ansSign + ansExponent + ansSignificant.substring(1);
     }
@@ -339,8 +337,14 @@ public class FloatNumber extends ALU {
             ansSignificant = ansSignificant.substring(1) + "0";
         }
 
-        String ansSign = String.valueOf(Arithmetic.XOR(s1.charAt(0), s2.charAt(0)));
+        char ansSign = Arithmetic.XOR(s1.charAt(0), s2.charAt(0));
         String ansExponent = toBinaryExponent(String.valueOf(decimalExponent));
         return ansSign + ansExponent + ansSignificant.substring(1);
+    }
+
+
+
+    String handyToBinary(String n) {
+        return null;
     }
 }

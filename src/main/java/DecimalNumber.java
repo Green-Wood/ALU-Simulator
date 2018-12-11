@@ -100,8 +100,7 @@ public class DecimalNumber extends ALU {
         String ans = reverse.toString();
         adder.setOperand(ans, StringGenerator.repeat('0', 32));
         ans = adder.calculate('1');                  //  加一
-        if (s.charAt(0) == '0') ans = "1" + ans;
-        else ans = "0" + ans;
+        ans = Arithmetic.NOT(s.charAt(0)) + ans;
         return ans;
     }
 
