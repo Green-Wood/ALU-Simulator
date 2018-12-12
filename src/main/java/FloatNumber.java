@@ -107,21 +107,29 @@ public class FloatNumber extends ALU {
     }
 
     private String toBinaryWithActualValue(String n) {
-        String hexString = Float.toHexString(Float.parseFloat(n));
-        String sign = hexString.substring(0, 1);
-        String beforePoint = hexString.split("[.]")[0];
-        char isNormalized = beforePoint.charAt(beforePoint.length()-1);
-        String hexValue = hexString.split("[.]")[1];
-        String hexSignificant = hexValue.split("p")[0];
-        String decimalExponent = hexValue.split("p")[1];
-        if (isNormalized == '0') {            // 非规格化数存储时，要将指数存为-127
-            decimalExponent = "-127";
+//        String hexString = Float.toHexString(Float.parseFloat(n));
+//        String sign = hexString.substring(0, 1);
+//        String beforePoint = hexString.split("[.]")[0];
+//        char isNormalized = beforePoint.charAt(beforePoint.length()-1);
+//        String hexValue = hexString.split("[.]")[1];
+//        String hexSignificant = hexValue.split("p")[0];
+//        String decimalExponent = hexValue.split("p")[1];
+//        if (isNormalized == '0') {            // 非规格化数存储时，要将指数存为-127
+//            decimalExponent = "-127";
+//        }
+//        String binaryExponent = toBinaryExponent(decimalExponent);
+//        String binarySignificant = toBinarySignificant(hexSignificant);
+//        if (sign.equals("-")) sign = "1";
+//        else sign = "0";
+//        return sign + binaryExponent + binarySignificant;
+        Float decimalValue = Float.parseFloat(n);
+        int intBits = Float.floatToIntBits(decimalValue);
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 32; i++) {
+            sb.insert(0, intBits & 1);
+            intBits = intBits >> 1;
         }
-        String binaryExponent = toBinaryExponent(decimalExponent);
-        String binarySignificant = toBinarySignificant(hexSignificant);
-        if (sign.equals("-")) sign = "1";
-        else sign = "0";
-        return sign + binaryExponent + binarySignificant;
+        return sb.toString();
     }
 
     /**
@@ -136,23 +144,6 @@ public class FloatNumber extends ALU {
             binaryExponent = "0" + binaryExponent;
         }
         return binaryExponent;
-    }
-
-    /**
-     *
-     * @param hexExponent 十六进制的尾数
-     * @return 返回一个23位长度的二进制尾数
-     */
-    private String toBinarySignificant(String hexExponent) {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < hexExponent.length(); i++) {
-            String currBin = getBinaryThroughHex(hexExponent.substring(i, i+1));
-            sb.append(currBin);
-        }
-        while (sb.length() != 24) {
-            sb.append("0000");
-        }
-        return sb.deleteCharAt(23).toString();
     }
 
     /**
@@ -213,7 +204,7 @@ public class FloatNumber extends ALU {
                 ansSignificant = "1" + ansSignificant.substring(0, ansSignificant.length()-1);
                 adder.setOperand(ansExponent, StringGenerator.repeat('0', ansExponent.length()));
                 ansExponent = adder.calculate('1');
-                if (isAllZero(ansExponent)) {               // 处理指数溢出
+                if (isAllOne(ansExponent)) {               // 处理指数溢出
                     if (ansSign == '0') return toBinary("plus infinity");
                     else return toBinary("minus infinity");
                 }
@@ -229,15 +220,17 @@ public class FloatNumber extends ALU {
                 adder.setOperand(reverse, StringGenerator.repeat('0', reverse.length()));
                 ansSignificant = adder.calculate('1');
             }
-            int offset = ansSignificant.indexOf("1");
-            for (int i = 0; i < offset; i++) {
-                adder.setOperand(ansExponent, StringGenerator.repeat('1', ansExponent.length()));
-                ansExponent = adder.calculate('0');
-                if (isAllZero(ansExponent)) {
-                    break;
-                }
-                ansSignificant = ansSignificant.substring(1) + "0";
+        }
+
+        //       Normalization  规格化
+        int offset = ansSignificant.indexOf("1");
+        for (int i = 0; i < offset; i++) {
+            adder.setOperand(ansExponent, StringGenerator.repeat('1', ansExponent.length()));
+            ansExponent = adder.calculate('0');           // 指数减一
+            if (isAllZero(ansExponent)) {
+                break;
             }
+            ansSignificant = ansSignificant.substring(1) + "0";
         }
 
         return ansSign + ansExponent + ansSignificant.substring(1);
@@ -279,12 +272,14 @@ public class FloatNumber extends ALU {
                 newHalf = half;
             }
             sb.replace(0, len, newHalf);
-            sb.deleteCharAt(sb.length()-1);
-            sb.insert(0, adder.nextC);
+            if (adder.nextC == '1' || i != 0) {
+                sb.deleteCharAt(sb.length()-1);
+                sb.insert(0, adder.nextC);
+            }
         }
+        if (adder.nextC == '1') decimalExponent++;
         String ansSignificant = sb.substring(0, len);
         int offset = ansSignificant.indexOf("1");
-        decimalExponent++;
         for (int i = 0; i < offset; i++) {
             decimalExponent--;
             if (decimalExponent == -127) {
@@ -329,22 +324,16 @@ public class FloatNumber extends ALU {
 
         String ansSignificant = sb.toString();
         int offset = ansSignificant.indexOf("1");
-        for (int i = 0; i < offset; i++) {
+        for (int i = 0; i < offset && decimalExponent > -127; i++) {
             decimalExponent--;
-            if (decimalExponent == -127) {
-                break;
-            }
             ansSignificant = ansSignificant.substring(1) + "0";
+        }
+        if (decimalExponent == -127) {
+            ansSignificant = "0" + ansSignificant.substring(0, ansSignificant.length() - 1);
         }
 
         char ansSign = Arithmetic.XOR(s1.charAt(0), s2.charAt(0));
         String ansExponent = toBinaryExponent(String.valueOf(decimalExponent));
         return ansSign + ansExponent + ansSignificant.substring(1);
-    }
-
-
-
-    String handyToBinary(String n) {
-        return null;
     }
 }
