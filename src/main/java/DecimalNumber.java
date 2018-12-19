@@ -87,7 +87,7 @@ public class DecimalNumber extends AbstractALU {
         return ans;
     }
 
-    private String reverse(String s) {                       // 对数进行"取反加一"
+    protected String reverse(String s) {                       // 对数进行"取反加一"
         StringBuilder reverse = new StringBuilder();
         for (int i = 1; i < 33; i += 4) {
             String subString = s.substring(i, i + 4);
@@ -98,7 +98,7 @@ public class DecimalNumber extends AbstractALU {
             }
         }
         String ans = reverse.toString();
-        adder.setOperand(ans, StringGenerator.repeat('0', 32));
+        adder.setOperand(ans, repeat('0', 32));
         ans = adder.calculate('1');                  //  加一
         ans = Arithmetic.NOT(s.charAt(0)) + ans;
         return ans;

@@ -1,5 +1,7 @@
 import Basic.SerialAdder;
 
+import java.util.Arrays;
+
 /**
  * 整个ALU simulator的抽象类
  *
@@ -37,10 +39,58 @@ public abstract class AbstractALU {
         return  toDecimal(multi(n1, n2));
     }
 
-    public String[] division() {
+    public String[] division() {                //  Integer的默认实现
         String[] bin = division(n1, n2);
         return new String[]{toDecimal(bin[0]), toDecimal(bin[1])};
     }    // 返回商，余数需要使用getRemainder得到
+
+    String repeat(char c, int times) {
+        char[] arr = new char[times];
+        Arrays.fill(arr, c);
+        return String.valueOf(arr);
+    }
+
+    String rightShift(String s, int n, char addChar) {
+        return repeat(addChar, n) + s.substring(0, s.length() - n);
+    }
+
+    StringBuilder rightShift(StringBuilder s, int n, char addChar) {
+        s.delete(s.length() - n, s.length());
+        return s.insert(0, repeat(addChar, n));
+    }
+
+    String leftShift(String s, int n, char addChar) {
+        s = s.substring(n);
+        return s + repeat(addChar, n);
+    }
+
+    StringBuilder leftShift(StringBuilder s, int n, char addQ) {
+        s.delete(0, n);
+        return s.append(repeat(addQ, n));
+    }
+
+    boolean isAllZero(String bin) {
+        for (int i = 0; i < bin.length(); i++) {
+            if (bin.charAt(i) != '0') return false;
+        }
+        return true;
+    }
+
+    boolean isAllOne(String bin) {
+        for (int i = 0; i < bin.length(); i++) {
+            if (bin.charAt(i) != '1') return false;
+        }
+        return true;
+    }
+
+    protected String reverse(String s) {                 // Float 和 Integer的默认reverse实现
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == '1') sb.append('0');
+            else sb.append('1');
+        }
+        return sb.toString();
+    }
 
     protected abstract String toDecimal(String bin);         // 各个具体子类需要自己实现十进制与二进制互相转化的方法
     protected abstract String toBinary(String n);

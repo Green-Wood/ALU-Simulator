@@ -1,5 +1,3 @@
-import Basic.StringGenerator;
-
 /**
  * 由位运算实现加减乘除
  * 整数的加减乘除（常用的32位二进制表达，负数使用补码实现）
@@ -16,7 +14,7 @@ public class IntegerNumber extends AbstractALU {
 
     @Override
     protected String sub(String s1, String s2){          // 两个二进制数相减，返回一个二进制数
-        s2 = StringGenerator.getReverse(s2);
+        s2 = reverse(s2);
         adder.setOperand(s1, s2);
         return adder.calculate('1');
     }
@@ -24,9 +22,9 @@ public class IntegerNumber extends AbstractALU {
     @Override
     protected String multi(String s1, String s2){       // 使用Booth算法来计算带符号二进制乘法
         String x = s1;
-        String _x = sub(StringGenerator.repeat('0', 32), s1);
+        String _x = sub(repeat('0', 32), s1);
         String y = s2;
-        StringBuilder sb = new StringBuilder(StringGenerator.repeat('0', 32) + y);      // 模拟寄存器
+        StringBuilder sb = new StringBuilder(repeat('0', 32) + y);      // 模拟寄存器
         y = y + "0";                                   // y后添加零，使得我们可以计算y0
         for (int i = y.length()-1; i > 0; i--){
             int delta = y.charAt(i) - y.charAt(i-1);       // 决定使用x或-x或0
@@ -40,9 +38,7 @@ public class IntegerNumber extends AbstractALU {
                 newHalf = half;
             }
             sb.replace(0, 32, newHalf);        // 使用新的前半部分来替换旧的
-            char sign = sb.charAt(0);                       // 根据符号来右移
-            sb.deleteCharAt(sb.length()-1);                 // 右移
-            sb.insert(0, sign);
+            sb = rightShift(sb, 1, sb.charAt(0));
         }
         String bin = sb.substring(sb.length()-32);      // 从倒数第二位开始
         return bin;
@@ -53,8 +49,8 @@ public class IntegerNumber extends AbstractALU {
         char diSign = s2.charAt(0);
         char reSign = s1.charAt(0);                    // remainder sign
         StringBuilder sb;
-        if (reSign == '0') sb = new StringBuilder(StringGenerator.repeat('0', 32) + s1);  // 根据符号添加
-        else sb = new StringBuilder(StringGenerator.repeat('1', 32) + s1);
+        if (reSign == '0') sb = new StringBuilder(repeat('0', 32) + s1);  // 根据符号添加
+        else sb = new StringBuilder(repeat('1', 32) + s1);
         char addQ = '1';
         for (int i = 0; i < 33; i++){
             reSign = sb.charAt(0);
@@ -73,15 +69,14 @@ public class IntegerNumber extends AbstractALU {
                 addQ = '0';
             }
             if (i < 32){                    // 前32次需要左移，最后一次需要经过后续判断
-                sb.deleteCharAt(0);
-                sb.append(addQ);
+                sb = leftShift(sb, 1, addQ);
             }
         }
         String remainder = sb.substring(0, 32);
         String quotient = sb.substring(32, sb.length());
-        quotient = quotient.substring(1) + addQ;                    // left shift quotient
+        quotient = leftShift(quotient, 1, addQ);                   // left shift quotient
         if (quotient.charAt(0) == '1') {                             // if quotient is negative, add 1
-            quotient = add(StringGenerator.repeat('0', 31) + "1" , quotient);
+            quotient = add(repeat('0', 31) + "1" , quotient);
         }
         // 对余数的结果进行修正
         if (reSign != s1.charAt(0)) {
@@ -95,12 +90,12 @@ public class IntegerNumber extends AbstractALU {
 
 
         //   若除数为D，则余数的范围[-|D|, |D|]
-        if (add(remainder, s2).equals(StringGenerator.repeat('0', 32))) {    // 除数和余数为负
+        if (isAllZero(add(remainder, s2))) {    // 除数和余数为负
             remainder = add(remainder, s2);
-            quotient = sub(quotient, StringGenerator.repeat('0', 31) + "1");
-        } else if (sub(remainder, s2).equals(StringGenerator.repeat('0', 32))) {   // 除数和余数相同
+            quotient = sub(quotient, repeat('0', 31) + "1");
+        } else if (isAllZero(sub(remainder, s2))) {   // 除数和余数相同
             remainder = sub(remainder, s2);
-            quotient = add(quotient, StringGenerator.repeat('0', 31) + "1");
+            quotient = add(quotient, repeat('0', 31) + "1");
         }
         return new String[]{quotient, remainder};
     }
@@ -130,8 +125,8 @@ public class IntegerNumber extends AbstractALU {
         }
         String ans = sb.toString();
         if (isNeg) {
-            ans = StringGenerator.getReverse(ans);
-            ans = adder.setOperand(ans, StringGenerator.repeat('0', 32)).calculate('1');
+            ans = reverse(ans);
+            ans = adder.setOperand(ans, repeat('0', 32)).calculate('1');
         }
         return ans;
     }

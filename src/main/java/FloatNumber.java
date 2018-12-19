@@ -1,5 +1,4 @@
 import Basic.Arithmetic;
-import Basic.StringGenerator;
 
 
 public class FloatNumber extends AbstractALU {
@@ -146,20 +145,6 @@ public class FloatNumber extends AbstractALU {
         return binaryExponent;
     }
 
-    public static boolean isAllOne(String bin) {
-        for (int i = 0; i < bin.length(); i++) {
-            if (bin.charAt(i) != '1') return false;
-        }
-        return true;
-    }
-
-    public static boolean isAllZero(String bin) {
-        for (int i = 0; i < bin.length(); i++) {
-            if (bin.charAt(i) != '0') return false;
-        }
-        return true;
-    }
-
     protected String add(String s1, String s2) {
         if (toDecimal(s1).equals("0")) return s2;
         if (toDecimal(s2).equals("0")) return s1;
@@ -171,10 +156,10 @@ public class FloatNumber extends AbstractALU {
             int delta = Math.abs(exponentValue1 - exponentValue2);
             if (exponentValue1 > exponentValue2) {
                 exponent2 = exponent1;
-                sig2 = StringGenerator.repeat('0', delta) + sig2.substring(0, sig2.length()-delta);
+                sig2 = rightShift(sig2, delta, '0');
             } else {
                 exponent1 = exponent2;
-                sig1 = StringGenerator.repeat('0', delta) + sig1.substring(0, sig1.length()-delta);
+                sig1 = rightShift(sig1, delta, '0');
             }
         }
         if (isAllZero(sig1)) return s2;
@@ -187,8 +172,8 @@ public class FloatNumber extends AbstractALU {
         if (s1.charAt(0) == s2.charAt(0)) {
             ansSignificant = unsignedAdd(sig1, sig2);
             if (adder.nextC == '1') {                      // 处理尾数相加溢出
-                ansSignificant = "1" + ansSignificant.substring(0, ansSignificant.length()-1);
-                adder.setOperand(ansExponent, StringGenerator.repeat('0', ansExponent.length()));
+                ansSignificant = rightShift(ansSignificant, 1, '1');
+                adder.setOperand(ansExponent, repeat('0', ansExponent.length()));
                 ansExponent = adder.calculate('1');
                 if (isAllOne(ansExponent)) {               // 处理指数溢出
                     if (ansSign == '0') return toBinary("plus infinity");
@@ -202,8 +187,8 @@ public class FloatNumber extends AbstractALU {
             if (isAllZero(ansSignificant)) return toBinary("0");    // 处理相减为0
             if (adder.nextC != '1') {
                 ansSign = Arithmetic.NOT(ansSign);
-                String reverse = StringGenerator.getReverse(ansSignificant);
-                adder.setOperand(reverse, StringGenerator.repeat('0', reverse.length()));
+                String reverse = reverse(ansSignificant);
+                adder.setOperand(reverse, repeat('0', reverse.length()));
                 ansSignificant = adder.calculate('1');
             }
         }
@@ -211,12 +196,12 @@ public class FloatNumber extends AbstractALU {
         //       Normalization  规格化
         int offset = ansSignificant.indexOf("1");
         for (int i = 0; i < offset; i++) {
-            adder.setOperand(ansExponent, StringGenerator.repeat('1', ansExponent.length()));
+            adder.setOperand(ansExponent, repeat('1', ansExponent.length()));
             ansExponent = adder.calculate('0');           // 指数减一
             if (isAllZero(ansExponent)) {
                 break;
             }
-            ansSignificant = ansSignificant.substring(1) + "0";
+            ansSignificant = leftShift(ansSignificant, 1, '0');
         }
 
         return ansSign + ansExponent + ansSignificant.substring(1);
@@ -227,7 +212,7 @@ public class FloatNumber extends AbstractALU {
     }
 
     private String unsignedSub(String s1, String s2) {
-        s2 = StringGenerator.getReverse(s2);
+        s2 = reverse(s2);
         return adder.setOperand(s1, s2).calculate('1');
     }
 
@@ -247,7 +232,7 @@ public class FloatNumber extends AbstractALU {
         }
 
         int len = sig1.length();
-        StringBuilder sb = new StringBuilder(StringGenerator.repeat('0', len) + sig2);
+        StringBuilder sb = new StringBuilder(repeat('0', len) + sig2);
         for (int i = sig2.length() - 1; i >= 0; i--) {
             adder.nextC = '0';                     // 考虑加法可能产生进位
             String half = sb.substring(0, len);
@@ -258,12 +243,14 @@ public class FloatNumber extends AbstractALU {
                 newHalf = half;
             }
             sb.replace(0, len, newHalf);
-            if (adder.nextC == '1' || i != 0) {
-                sb.deleteCharAt(sb.length()-1);
-                sb.insert(0, adder.nextC);
+            if (i != 0) {
+                sb = rightShift(sb, 1, adder.nextC);
             }
         }
-        if (adder.nextC == '1') decimalExponent++;
+        if (adder.nextC == '1') {
+            decimalExponent++;
+            sb = rightShift(sb, 1, adder.nextC);
+        }
         String ansSignificant = sb.substring(0, len);
         int offset = ansSignificant.indexOf("1");
         for (int i = 0; i < offset; i++) {
@@ -271,11 +258,16 @@ public class FloatNumber extends AbstractALU {
             if (decimalExponent == -127) {
                 break;
             }
-            ansSignificant = ansSignificant.substring(1) + "0";
+            ansSignificant = leftShift(ansSignificant, 1, '0');
         }
         char ansSign = Arithmetic.XOR(s1.charAt(0), s2.charAt(0));
         String ansExponent = toBinaryExponent(String.valueOf(decimalExponent));
         return ansSign + ansExponent + ansSignificant.substring(1);
+    }
+
+    public String[] division() {
+        String[] ans = division(n1, n2);
+        return new String[]{toDecimal(ans[0]), ""};
     }
 
     protected String[] division(String s1, String s2) {
@@ -312,17 +304,17 @@ public class FloatNumber extends AbstractALU {
                 sig1 = afterSub;
                 sb.append('1');
             }
-            sig2 = "0" + sig2.substring(0, sig2.length()-1);      // 只能右移除数，而不能左移被除数
+            sig2 = rightShift(sig2, 1, '0');
         }
 
         String ansSignificant = sb.toString();
         int offset = ansSignificant.indexOf("1");
         for (int i = 0; i < offset && decimalExponent > -127; i++) {
             decimalExponent--;
-            ansSignificant = ansSignificant.substring(1) + "0";
+            ansSignificant = leftShift(ansSignificant, 1, '0');
         }
         if (decimalExponent == -127) {
-            ansSignificant = "0" + ansSignificant.substring(0, ansSignificant.length() - 1);
+            ansSignificant = rightShift(ansSignificant, 1, '0');
         }
 
         char ansSign = Arithmetic.XOR(s1.charAt(0), s2.charAt(0));
