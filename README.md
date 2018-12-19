@@ -1,4 +1,4 @@
-# ALU Simulator
+# AbstractALU Simulator
 
 Green Wood
 

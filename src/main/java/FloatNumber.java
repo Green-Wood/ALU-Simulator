@@ -2,7 +2,7 @@ import Basic.Arithmetic;
 import Basic.StringGenerator;
 
 
-public class FloatNumber extends ALU {
+public class FloatNumber extends AbstractALU {
 
     private String exponent1;
     private String exponent2;
@@ -146,20 +146,6 @@ public class FloatNumber extends ALU {
         return binaryExponent;
     }
 
-    /**
-     *
-     * @param hex 一个十六进制数
-     * @return  返回一个长度为4位的二进制数
-     */
-    private String getBinaryThroughHex(String hex) {
-        int decimalValue = Integer.valueOf(hex, 16);
-        String bin = Integer.toBinaryString(decimalValue);
-        while (bin.length() != 4) {
-            bin = '0' + bin;
-        }
-        return bin;
-    }
-
     public static boolean isAllOne(String bin) {
         for (int i = 0; i < bin.length(); i++) {
             if (bin.charAt(i) != '1') return false;
@@ -292,24 +278,31 @@ public class FloatNumber extends ALU {
         return ansSign + ansExponent + ansSignificant.substring(1);
     }
 
-    protected String division(String s1, String s2) {
-        if (toDecimal(s1).equals("0")) return toBinary("0");
+    protected String[] division(String s1, String s2) {
+        String[] ans = new String[2];
+        ans[1] = "";
+        if (toDecimal(s1).equals("0")) {
+            ans[0] = toBinary("0");
+            return ans;
+        }
         if (toDecimal(s2).equals("0")) {
-            if (s1.charAt(0) == '1') return toBinary("minus infinity");
-            else return toBinary("plus infinity");
+            if (s1.charAt(0) == '1') ans[0] = toBinary("minus infinity");
+            else ans[0] = toBinary("plus infinity");
+            return ans;
         }
 
         initialize(s1, s2);
 
         int decimalExponent = Integer.valueOf(exponent1, 2) - Integer.valueOf(exponent2, 2);
         if (decimalExponent >= 128) {
-            if (s1.charAt(0) == '1') return toBinary("minus infinity");
-            else return toBinary("plus infinity");
+            if (s1.charAt(0) == '1') ans[0] = toBinary("minus infinity");
+            else ans[0] = toBinary("plus infinity");
+            return ans;
         }
 
         int len = sig1.length();
         StringBuilder sb = new StringBuilder();
-        ALU integer = new IntegerNumber();
+        AbstractALU integer = new IntegerNumber();
         for (int i = 0; i < len; i++) {
             adder.nextC = '0';
             String afterSub = integer.sub(sig1, sig2);
@@ -334,6 +327,7 @@ public class FloatNumber extends ALU {
 
         char ansSign = Arithmetic.XOR(s1.charAt(0), s2.charAt(0));
         String ansExponent = toBinaryExponent(String.valueOf(decimalExponent));
-        return ansSign + ansExponent + ansSignificant.substring(1);
+        ans[0] = ansSign + ansExponent + ansSignificant.substring(1);
+        return ans;
     }
 }

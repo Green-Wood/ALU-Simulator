@@ -7,12 +7,12 @@ import Basic.*;
  * 还未实现这种表达方式的乘除法
  * @author greenwood
  */
-public class DecimalNumber extends ALU {
+public class DecimalNumber extends AbstractALU {
 
     @Override
     protected String toDecimal(String bin) {               // 二进制转十进制
         StringBuilder decimal = new StringBuilder();
-        for (int i = 1; i < 33; i += 4) {
+        for (int i = 1; i < bin.length(); i += 4) {
             String binaryValue = bin.substring(i, i + 4);
             int decimalValue = 0;
             for (int j = 0; j < binaryValue.length(); j++) {
@@ -111,7 +111,7 @@ public class DecimalNumber extends ALU {
     }
 
     @Override
-    protected String division(String s1, String s2) {
+    protected String[] division(String s1, String s2) {
         return null;
     }
 }

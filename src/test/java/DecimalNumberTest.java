@@ -2,7 +2,7 @@ import static org.junit.Assert.*;
 
 public class DecimalNumberTest {
 
-    private ALU test = new DecimalNumber();
+    private AbstractALU test = new DecimalNumber();
 
     @org.junit.Test
     public void toDecimal() {

@@ -6,7 +6,7 @@ import Basic.StringGenerator;
  * 如：15 -> 0000 0000 0000 0000 0000 0000 0000 1111        -2 -> 1111 1111 1111 1111 1111 1111 1111 1110
  * @author greenwood
  */
-public class IntegerNumber extends ALU{
+public class IntegerNumber extends AbstractALU {
 
     @Override
     protected String add(String s1, String s2){     // 两个二进制数相加，返回一个二进制数
@@ -49,7 +49,7 @@ public class IntegerNumber extends ALU{
     }
 
     @Override
-    protected String division(String s1, String s2){        // 将除法的余数保存在remainder中
+    protected String[] division(String s1, String s2){        // 将除法的余数保存在remainder中
         char diSign = s2.charAt(0);
         char reSign = s1.charAt(0);                    // remainder sign
         StringBuilder sb;
@@ -92,8 +92,15 @@ public class IntegerNumber extends ALU{
                 remainder = sub(remainder, s2);
             }
         }
-        this.remainder = remainder;
-        return quotient;
+
+        if (add(remainder, s2).equals(StringGenerator.repeat('0', 32))) {
+            remainder = add(remainder, s2);
+            quotient = sub(quotient, StringGenerator.repeat('0', 31) + "1");
+        } else if (sub(remainder, s2).equals(StringGenerator.repeat('0', 32))) {
+            remainder = sub(remainder, s2);
+            quotient = add(quotient, StringGenerator.repeat('0', 31) + "1");
+        }
+        return new String[]{quotient, remainder};
     }
 
     @Override
