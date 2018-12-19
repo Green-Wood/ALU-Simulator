@@ -93,10 +93,12 @@ public class IntegerNumber extends AbstractALU {
             }
         }
 
-        if (add(remainder, s2).equals(StringGenerator.repeat('0', 32))) {
+
+        //   若除数为D，则余数的范围[-|D|, |D|]
+        if (add(remainder, s2).equals(StringGenerator.repeat('0', 32))) {    // 除数和余数为负
             remainder = add(remainder, s2);
             quotient = sub(quotient, StringGenerator.repeat('0', 31) + "1");
-        } else if (sub(remainder, s2).equals(StringGenerator.repeat('0', 32))) {
+        } else if (sub(remainder, s2).equals(StringGenerator.repeat('0', 32))) {   // 除数和余数相同
             remainder = sub(remainder, s2);
             quotient = add(quotient, StringGenerator.repeat('0', 31) + "1");
         }

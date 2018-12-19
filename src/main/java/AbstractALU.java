@@ -1,5 +1,4 @@
 import Basic.SerialAdder;
-import Basic.StringGenerator;
 
 /**
  * 整个ALU simulator的抽象类
