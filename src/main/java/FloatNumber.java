@@ -233,17 +233,17 @@ public class FloatNumber extends AbstractALU {
 
         int len = sig1.length();
         StringBuilder sb = new StringBuilder(repeat('0', len) + sig2);
-        for (int i = sig2.length() - 1; i >= 0; i--) {
+        for (int i = 0; i < len; i++) {
             adder.nextC = '0';                     // 考虑加法可能产生进位
             String half = sb.substring(0, len);
             String newHalf;
-            if (sig2.charAt(i) == '1') {
+            if (sb.charAt(sb.length() - 1) == '1') {
                 newHalf = adder.setOperand(half, sig1).calculate('0');
             } else {
                 newHalf = half;
             }
             sb.replace(0, len, newHalf);
-            if (i != 0) {
+            if (i != len - 1) {
                 sb = rightShift(sb, 1, adder.nextC);
             }
         }
@@ -294,17 +294,16 @@ public class FloatNumber extends AbstractALU {
 
         int len = sig1.length();
         StringBuilder sb = new StringBuilder();
-        AbstractALU integer = new IntegerNumber();
         for (int i = 0; i < len; i++) {
             adder.nextC = '0';
-            String afterSub = integer.sub(sig1, sig2);
+            String afterSub = unsignedSub(sig1, sig2);
             if (adder.nextC == '0') {      // 不够减
                 sb.append('0');
             } else {
                 sig1 = afterSub;
                 sb.append('1');
             }
-            sig2 = rightShift(sig2, 1, '0');
+            sig2 = rightShift(sig2, 1, '0');        //   右移除数
         }
 
         String ansSignificant = sb.toString();
